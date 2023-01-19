@@ -5,7 +5,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 #################################
 from	typing	import	Dict
 import	json
-import	uuid
+# import	uuid
 #################################
 from	webauthn	import	(
 		generate_registration_options,
@@ -32,9 +32,11 @@ auth = Blueprint('auth', __name__)
 #
 ################
 #	customers	domain
-rp_id	=	"blocsquad.repl.co"
+rp_id	=	"bloclabs.repl.co"
+#rp_id	=	"bloc.id"
 #	customer	origin	site
-origin	=	"https://demo.blocsquad.repl.co"
+origin	=	"https://bloc.bloclabs.repl.co"
+#origin	=	"https://bloc.id"
 rp_name	=	"Sample	RP"
 # user_id	=	str(uuid.uuid4())
 # username	=	"johndoe@email.com"
