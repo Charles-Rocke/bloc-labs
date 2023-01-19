@@ -1,0 +1,14 @@
+{% extends "account/email/base_message.txt" %}
+{% load account %}
+{% load i18n %}
+
+{% block content %}{% autoescape off %}{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}You're recieving this email because you recently registered for
+passwordless authentication by bloc at {{ site_domain }}.
+
+Click the link to confrim your email
+{{ activate_url }}
+
+We will reach out to shortly to answer any questions you may have.
+Thank you for choosing bloc!
+{{ site_domain }}
+{% endblocktrans %}{% endautoescape %}{% endblock %}

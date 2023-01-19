@@ -1,0 +1,46 @@
+html, body {
+  height: 100%;
+  width: 100%;
+	
+}
+
+.set-container, .dash-container{
+	display: flex;
+}
+
+#display_image{
+	background-position: center;
+	background-size: cover;
+	
+}
+
+/*
+.company-name{
+	color: lime;
+}
+*/
+
+.hidden {
+  display: none;
+}
+
+/* Setup button */
+.login100-form-bgbtn {
+	color: #FFFFFF;
+  position: absolute;
+  z-index: -1;
+  width: 300%;
+  height: 100%;
+  background: #000000;
+  background: -webkit-linear-gradient(right, #000000, #000000, #000000, #000000);
+  background: -o-linear-gradient(right, #000000, #000000, #000000, #000000);
+  background: -moz-linear-gradient(right, #000000, #000000, #000000, #000000);
+  background: linear-gradient(right, #000000, #000000, #000000, #000000);
+  top: 0;
+  left: -100%;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}

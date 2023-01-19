@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>account | setup</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->	
+    <link rel="icon" type="image/png" href="/static/app/favicon.ico"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/app/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/app/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/app/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/app/vendor/animate/animate.css">
+    <!--===============================================================================================-->	
+    <link rel="stylesheet" type="text/css" href="/static/app/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/app/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/app/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->	
+    <link rel="stylesheet" type="text/css" href="/static/app/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/app/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/static/app/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/app/css/setup.css">
+    <!--===============================================================================================-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  </head>
+  <body>
+    <main class = "set-container">
+      <div class = "container">
+        <!-- flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        {% if category == 'error' %}
+        <div class="alert alert-danger alert-dismissable fade show" role="alert">
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% else %}
+        <div class="alert alert-success alert-dismissable fade show" role="alert">
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <!-- end flash messages -->
+        <!-- CTA title -->
+        <span class="login100-form-title p-3 container-lg">
+          <h3>Design your authentication</h3>
+        </span>
+        <!-- Logo -->
+        <form method = "POST" action = "{{ url_for('views.dash_home') }}">
+          <div class="mb-3">
+            <label for="formFile" class="form-label">Set logo (optional)</label>
+            <p><input class="form-control brand" type="file"  accept="image/*" name="logo" id="file" ></p>
+            <!-- Header -->
+            <label for="exampleFormControlInput1" class="form-label " id = "field-name">Header</label>
+            <input type="text" class="form-control setup-signup-header" id="exampleFormControlInput1" placeholder="Enter company name" name = "header">
+            <!-- Field name -->
+            <label for="exampleFormControlInput1" class="form-label" id = "field-name">Field name <small>(Email, username, etc)</small></label>
+            <input type="text" class="form-control field-name-value" id="exampleFormControlInput1" placeholder="Enter field name" name = "field-name">
+            <!-- Colors -->
+            <label for="exampleColorInput" class="form-label">Brand colors <small> (primary and secondary)</small></label>
+            <div class="d-flex flex-row mb-3">
+              <div class="p-2"><input type="color" class="form-control form-control-color primary-color" id="exampleColorInput" value="#000000" title="Choose your color" name = "primary"></div>
+              <div class="p-2"><input type="color" class="form-control form-control-color secondary-color" id="exampleColorInput" value="#000000" title="Choose your color" name = "secondary"></div>
+              <!-- 
+                <label for="exampleFormControlInput1" class="form-label" id = "field-name">Domain</label>
+                <input type="text" class="form-control field-name-value" id="exampleFormControlInput1" placeholder="Enter domain ex. companyname.xyz">
+                -->
+            </div>
+            <!-- Company name -->
+            <label for="exampleFormControlInput1" class="form-label " id = "field-name">Company name</label>
+            <input type="text" class="form-control companyBrandName" id="exampleFormControlInput1" placeholder="Enter company name" name = "company-name">
+            <h4>Looks good?</h4>
+            <button class="btn button startup-price-btn" type = "submit">
+              Continue</a>
+              <!-- line break -->
+          </div>
+        </form>
+        <!-- Submit button -->
+      </div>
+      <!-- Break -->
+      <!-- User Created Template -->
+      <div class="limiter">
+			  <div class="container-login100">
+			    <div class="wrap-login100">
+			      <form method = "POST" action = "#" class="login100-form validate-form">
+			        <span class="login100-form-title py-5 px-5 container-xl" id = "display_image">
+			          <h3 class = "company-name">Your Brand</h3>
+			        </span>
+			        <span class="login100-form-title p-b-48">
+			          <p class = "setup-signup-header-message">Enter your email below to sign up for an example account</p>
+			        </span>
+			        <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+			          <label class = "field-name">Email</label>
+			          <strong><input class="input100" type="text" name="username" id="username" placeholder = "Enter email"></strong>
+			          <span class="focus-input100"></span>
+			        </div>
+			        <div class="container-login100-form-btn">
+			          <div class="wrap-login100-form-btn">
+			            <div class="login100-form-bgbtn"></div>
+			            <button class="login100-form-btn">
+			            Sign up
+			            </button>
+			          </div>
+			        </div>
+			        <div hidden class="text-center p-t-115">
+			          <span class="txt1">
+			          Already have an account?
+			          </span>
+			          <br>
+			          <a class="txt2" href="#">
+			          Login
+			          </a>
+			        </div>
+			      </form>
+			    </div>
+			  </div>
+			</div>
+    </main>
+    <div id="dropDownSelect1"></div>
+    <!--===============================================================================================-->
+    <script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/vendor/bootstrap/js/popper.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/vendor/daterangepicker/moment.min.js"></script>
+    <script src="/static/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/js/main.js"></script>
+    <!-- JS -->
+    <script src="/static/app/js/setup.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>bloc | signup</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!--app ===============================================================================================-->	
+      <link rel="icon" type="image/png" href="/static/app/favicon.ico"/>
+      <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="/static/app/vendor/bootstrap/css/bootstrap.min.css">
+      <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="/static/app/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+      <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="/static/app/fonts/iconic/css/material-design-iconic-font.min.css">
+      <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="/static/app/vendor/animate/animate.css">
+      <!--===============================================================================================-->	
+      <link rel="stylesheet" type="text/css" href="/static/app/vendor/css-hamburgers/hamburgers.min.css">
+      <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="/static/app/vendor/animsition/css/animsition.min.css">
+      <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="/static/app/vendor/select2/select2.min.css">
+      <!--===============================================================================================-->	
+      <link rel="stylesheet" type="text/css" href="/static/app/vendor/daterangepicker/daterangepicker.css">
+      <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href="/static/app/css/util.css">
+      <link rel="stylesheet" type="text/css" href="/static/app/css/main.css">
+      <!--===============================================================================================-->
+   </head>
+   <body>
+      <div class="limiter">
+         <div class="container-login100">
+            <div class="wrap-login100">
+               <form method = "POST" action = "/auth/signup" class="login100-form validate-form">
+				  				<span class="login100-form-title pb-3">
+                  	<a href = "{{ url_for('views.home') }}"><img src="/static/images/birds.svg" alt="bloc" width="95" height="84" class="logo d-inline-block align-text-top"></a>
+                  </span>
+								  <span class="login100-form-title pb-3">sign up</span>
+                  <span class="login100-form-title p-b-48">
+                  	<p>Enter your email below to sign up</p>
+                  </span>
+                  <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+                     <label>Email</label>
+                     <strong><input class="input100" type="text" name="email" id="username" placeholder = "Enter email"></strong>
+                     <span class="focus-input100"></span>
+                  </div>
+                  <div class="container-login100-form-btn">
+                     <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                        <button class="login100-form-btn">
+                        sign up
+                        </button>
+                     </div>
+                  </div>
+                  <div hidden class="text-center p-t-115">
+                     <span class="txt1">
+                     Already have an account?
+                     </span>
+					  <br>
+                     <a class="txt2" href="/login">
+                     Login
+                     </a>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+      <div id="dropDownSelect1"></div>
+      <!--===============================================================================================-->
+      <script src="/static/app/vendor/jquery/jquery-3.2.1.min.js"></script>
+      <!--===============================================================================================-->
+      <script src="/static/app/vendor/animsition/js/animsition.min.js"></script>
+      <!--===============================================================================================-->
+      <script src="/static/app/vendor/bootstrap/js/popper.js"></script>
+      <script src="/static/app/vendor/bootstrap/js/bootstrap.min.js"></script>
+      <!--===============================================================================================-->
+      <script src="/static/app/vendor/select2/select2.min.js"></script>
+      <!--===============================================================================================-->
+      <script src="/static/app/vendor/daterangepicker/moment.min.js"></script>
+      <script src="/static/app/vendor/daterangepicker/daterangepicker.js"></script>
+      <!--===============================================================================================-->
+      <script src="/static/app/vendor/countdowntime/countdowntime.js"></script>
+      <!--===============================================================================================-->
+      <script src="/static/app/js/main.js"></script>
+   </body>
+</html>

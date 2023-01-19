@@ -1,0 +1,27 @@
+{% extends "account/index.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+{% block content %}
+<form class="signup" id="signup_form" method="post" action="{% url 'account_logout' %}">
+   {% csrf_token %}
+   <center><img src="/static/images/birds.svg" alt="bloc" width="95" height="84" class="logo d-inline-block align-text-top"></center>
+   <span class="login100-form-title pb-3 signup-success-span">
+   sign up successful!
+   </span>
+   <center>
+      <strong>
+          <small>Thank you for your interest, your spot in line has been reserved!</small>
+      </strong>
+   </center>
+   <br>
+   <div class="container-login100-form-btn">
+    <div class="wrap-login100-form-btn">
+       <div class="login100-form-bgbtn"></div>
+       <button class="login100-form-btn" type = "submit">
+        {% trans "return home" %} &raquo;
+       </button>
+    </div>
+   </div>
+</form>
+{% endblock %}

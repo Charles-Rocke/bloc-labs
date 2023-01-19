@@ -1,0 +1,89 @@
+{% extends "app/base.html" %} {% block title %}bloc | pricing{% endblock title %}
+{% block content %}
+<!-- Mashead header-->
+<header class="masthead">
+    <div class="container px-5">
+       <div class="row gx-5 align-items-center">
+          <div class="price_plan_area section_padding_130_80" id="pricing">
+             <div class="container">
+                <div class="row justify-content-center">
+                   <div class="col-12 col-sm-8 col-lg-6">
+                      <!-- Section Heading-->
+                      <div class="section-heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                         <!-- <h6>Pricing Plans</h6> -->
+                         <h3>pricing</h3>
+                         <p>Don't start paying until after your first user!</p>
+                         <br>
+                      </div>
+                   </div>
+                </div>
+                <div class="row justify-content-center  ">
+                   <!-- Single Price Plan Area-->
+                   <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                      <div class="single_price_plan wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                         <div class="title">
+                            <h3>startups</h3>
+                            <p>for early stage teams</p>
+                            <div class="line"></div>
+                         </div>
+                         <div class="price">
+                            <h4>$1</h4>
+                            <p>per monthly active user</p>
+                         </div>
+                         <div class="description">
+                            <p><i class="lni lni-checkmark-circle"></i>Unlimited Logins</p>
+                            <p><i class="lni lni-checkmark-circle"></i>Premium Customer Support</p>
+                            <p><i class="lni lni-checkmark-circle"></i>Remove Branding</p>
+                         </div>
+                         <div class="button"><a class="btn startup-price-btn" href="{{ url_for('auth.signup_email') }}">Sign up</a></div>
+                      </div>
+                   </div>
+                   <!-- Small Business Price Plan Area--
+                   <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                      <div class="single_price_plan active wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                         <!-- Side Shape--
+                         <div class="title">
+                            <h3>small business</h3>
+                            <p>for small business teams</p>
+                            <div class="line"></div>
+                         </div>
+                         <div class="price">
+                            <h4>$9.99</h4>
+                         </div>
+                         <div class="description">
+                            <p><i class="lni lni-checkmark-circle"></i>Duration: 3 Month</p>
+                            <p><i class="lni lni-checkmark-circle"></i>50 Features</p>
+                            <p><i class="lni lni-checkmark-circle"></i>No Hidden Fees</p>
+                            <p><i class="lni lni-checkmark-circle"></i>150+ Video Tuts</p>
+                            <p><i class="lni lni-close"></i>5 Tools</p>
+                         </div>
+                         <div class="button"><a class="btn team-price-btn" href="#">Get Started</a></div>
+                      </div>
+                   </div> -->
+                   <!-- Enterprise Price Plan Area-->
+                   <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                      <div class="single_price_plan wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                         <div class="title">
+                            <h3>enterprise</h3>
+                            <p>for later stage teams</p>
+                            <div class="line"></div>
+                         </div>
+                         <div class="price">
+                            <h4>Let's Chat</h4>
+                            <p>custom authentication</p>
+                         </div>
+                         <div class="description">
+                            <p><i class="lni lni-checkmark-circle"></i>Best for 1000+ users</p>
+                            <p><i class="lni lni-checkmark-circle"></i>Volume Discounts</p>
+                            <p><i class="lni lni-checkmark-circle" ></i>Priority Customer Service</p>
+                         </div>
+                         <div class="button"><a class="btn ent-price-btn" href="{{ url_for('auth.signup_email') }}">Sign up</a></div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+            </div>
+       </div>
+    </div>
+ </header>
+{% endblock content %}
