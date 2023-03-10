@@ -4,6 +4,10 @@
       <title>bloc | login</title>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- my JS -->
+      <script src="/static/js/simplewebauthn-browser.4.1.0.umd.min.js"></script>
+		 <!--autocomplete ui ===============================================================================================-->	
+		 <script src="/static/js/script.js"></script>
       <!--app ===============================================================================================-->	
       <link rel="icon" type="image/png" href="/static/app/favicon.ico"/>
       <!--===============================================================================================-->
@@ -41,7 +45,7 @@
                   </span>
                   <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
                      <label>Email</label>
-                     <strong><input class="input100" type="text" name="email" id="username" placeholder = "Enter email"></strong>
+                     <strong><input class="input100" type="text" name="email" id="username" placeholder = "Enter email" autocomplete="webauthn"></strong>
                      <span class="focus-input100"></span>
                   </div>
                   <div class="container-login100-form-btn">
