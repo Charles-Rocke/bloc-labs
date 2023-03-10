@@ -1,0 +1,6 @@
+Create api that creates user with webauthn
+	How: Turn webauthn helpers into apis
+		customer sends request to our api to perform webauthn
+		we respond back with json data that they would need to complete auth
+		customer consumes json data
+		

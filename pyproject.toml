@@ -16,6 +16,8 @@ db = "^0.1.1"
 Flask-Session = "^0.4.0"
 dict = "^2020.12.3"
 Flask-Migrate = "^4.0.2"
+fastapi = "^0.94.0"
+uvicorn = "^0.21.0"
 
 [tool.poetry.dev-dependencies]
 
