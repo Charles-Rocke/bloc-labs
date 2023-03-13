@@ -18,7 +18,7 @@ from	webauthn.helpers.structs	import	(
 from	webauthn.helpers.cose	import	COSEAlgorithmIdentifier
 
 from . import db
-from .models import User, WebAuthnCredential, Credential,	UserAccount, _str_uuid
+from .models import User, WebAuthnCredential, _str_uuid
 from flask_login import login_user, login_required, logout_user, current_user
 
 api = FastAPI()

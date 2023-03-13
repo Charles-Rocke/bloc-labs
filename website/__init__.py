@@ -22,7 +22,7 @@ def create_app():
 		app.register_blueprint(auth,url_prefix='/')
 		app.register_blueprint(util,url_prefix='/')
 
-		from .models import Form, User, Credential,	UserAccount, WebAuthnCredential
+		from .models import Form, User, WebAuthnCredential
 
 		#create_database(app)
 

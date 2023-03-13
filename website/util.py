@@ -34,27 +34,3 @@ def	display_form():
 		# return False for 'not authenticated'
 		else:
 			return	{"form": False}
-
-
-# #####################
-# #	login
-# @util.route("/auth",	methods=["GET","POST"])
-# def	verified_authentication_check():
-# 		if	request.method	==	'POST':
-# 			print("Passed	POST	check")
-# 			data	=	request.get_json()
-# 			print(f"data	type:	{type(data)}")
-# 			#	for	items	in	the	dictionary	print	them
-# 			for	k,	v	in	data.items():
-# 				print(type(k),	type(v))
-# 				print(k,	v)
-
-# 			#	log	current	user	in
-# 			flash('Logged in successfully!', category='success')
-# 			# assign session user to bloc user
-# 			user = User.query.filter_by(email=form['email']).first()
-# 			login_user(user, remember=True)
-# 			return {"authenticated" : True}
-# 		# return False for 'not authenticated'
-# 		else:
-# 			return	{"authenticated": False}

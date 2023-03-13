@@ -9,7 +9,8 @@ import uuid
 
 def _str_uuid():
     return str(uuid.uuid4())
-	
+
+
 class Form(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	# logo (tbd)
@@ -32,7 +33,7 @@ class Form(db.Model):
 class User(db.Model, UserMixin):
 	__tablename__ = "user"
 	id = db.Column(db.Integer, primary_key=True)
-	# users unique id
+	# user unique id
 	uid = db.Column(db.String(40), default= _str_uuid, unique=True)
 	# users email
 	email = db.Column(db.String(150), unique = True)
@@ -43,33 +44,16 @@ class User(db.Model, UserMixin):
 		backref=backref("user", cascade="all, delete"),
 		lazy=True,
   )
+	end_users = db.relationship("EndUser", backref=backref("user", cascade="all, delete"), lazy=True,)
 	
 
-# need to make relations with classes above
-# End users
-@dataclass
-class Credential:
-	id: bytes
-	public_key: bytes
-	sign_count: int
-	transports: Optional[List[AuthenticatorTransport]] = None
-
-# link to User id:
-	# why:
-		# A "user account" will be assigned to a User which is then linked to a list of credentials for the User
-@dataclass
-class UserAccount:
-	id: str
-	username: str
-	credentials: List[Credential] = field(default_factory=list)
-	
-
-# Test Model for WebAuthnCredentials
+# WebAuthnCredentials
 class WebAuthnCredential(db.Model):
 	"""Stored WebAuthn Credentials as a replacement for passwords."""
 	__tablename__ = "credential"
 	id = db.Column(db.Integer, primary_key=True)
 	user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+	end_user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
 	credential_id = db.Column(db.LargeBinary, nullable=False)
 	credential_public_key = db.Column(db.LargeBinary, nullable=False)
 	current_sign_count = db.Column(db.Integer, default=0)
@@ -80,5 +64,19 @@ class WebAuthnCredential(db.Model):
 			return f"<Credential {self.credential_id}>"
 
 
+# end user
+class EndUser(db.Model):
+	__tablename__ = "enduser"
 
+	id = db.Column(db.Integer, primary_key=True)
+	# end users username
+	username = db.Column(db.String())
+	# end users organization of origin
+	org = db.Column(db.Integer, db.ForeignKey("user.id"))
+	# end users optional webauthn credential
+	credentials = db.relationship(
+		"WebAuthnCredential",
+		backref=backref("enduser", cascade="all, delete"),
+		lazy=True,
+  )
 	
