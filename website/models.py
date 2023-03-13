@@ -1,7 +1,7 @@
 from typing import Optional, List
 from dataclasses import dataclass, field
 from webauthn.helpers.structs import AuthenticatorTransport
-from . import db
+from .app import db
 from flask_login import UserMixin
 from sqlalchemy.orm import backref
 import uuid

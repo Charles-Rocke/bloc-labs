@@ -14,9 +14,9 @@ def create_app():
 		db.init_app(app)
 		migrate.init_app(app, db)
 	
-		from.views import views
-		from.auth import auth
-		from.util import util
+		from .views import views
+		from .auth import auth
+		from .util import util
 
 		app.register_blueprint(views,url_prefix='/')
 		app.register_blueprint(auth,url_prefix='/')

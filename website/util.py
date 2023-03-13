@@ -1,7 +1,7 @@
 from flask import Blueprint, request, session
 from flask_login import login_required, current_user
 from .models import User, Form
-from . import db
+from .app import db
 
 util = Blueprint('util', __name__)
 
