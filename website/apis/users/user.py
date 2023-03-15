@@ -1,6 +1,7 @@
-from flask import request, session, flash
-from fastapi import FastAPI
+from flask import request, session, flash, url_for
+from fastapi import FastAPI, Request
 import uvicorn
+import json
 
 from	webauthn	import	(
 		generate_registration_options,
@@ -17,14 +18,33 @@ from	webauthn.helpers.structs	import	(
 )
 from	webauthn.helpers.cose	import	COSEAlgorithmIdentifier
 
-from .app import db
-from .models import User, WebAuthnCredential, _str_uuid
+from website.app import db
+from website.models import User, WebAuthnCredential, _str_uuid
 from flask_login import login_user, login_required, logout_user, current_user
 
-api = FastAPI()
+api = FastAPI(docs_url="/redoc_url")
 
 
-# User api views
+### User api views
+
+# GETS
+# get all users
+@api.get("/user")
+def get_all_users():
+	users = User.query.all()
+
+	response_list = []
+	for user in users:
+		response_dict = {}
+		response_dict["id"] = user.uid
+		response_dict["email"] = user.email
+		response_list.append(response_dict)
+		
+	json_formatted_str = json.dumps(response_list, indent=2)
+	# response = json.dumps(response_list)
+	return json_formatted_str
+	
+# get registration options from client
 @api.get("/registration")
 def register(rp_id: str, rp_name: str, user_id: str, username: str):
 	global current_registration_challenge
@@ -50,7 +70,8 @@ def register(rp_id: str, rp_name: str, user_id: str, username: str):
 	print(options)
 	return options_to_json(options)
 
-# verify register
+
+# verify registration from client
 @api.post("/verify-reg")
 def verify_reg(rp_id: str, origin: str):
 	print("IN	VERIFY	REG	OPTIONS")
@@ -137,3 +158,4 @@ def verify_reg(rp_id: str, origin: str):
 		
 	except	Exception	as	err:
 			return	{"verified":	False,	"msg":	str(err),	"status":	400}
+

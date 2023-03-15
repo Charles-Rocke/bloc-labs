@@ -1,14 +1,18 @@
+from fastapi import FastAPI
+from fastapi.middleware.wsgi import WSGIMiddleware
+import uvicorn
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import path
 from flask_login import LoginManager
 from flask_migrate import Migrate
 
+
 db = SQLAlchemy()
-DB_NAME = "database.db"
 migrate = Migrate()
 def create_app():
+		api = FastAPI()
 		app = Flask(__name__)
+		api.mount("/", WSGIMiddleware(app))
 		app.config['SECRET_KEY'] = 'asdfghjkl'
 		app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///db.sqlite3'
 		db.init_app(app)
@@ -17,10 +21,12 @@ def create_app():
 		from .views import views
 		from .auth import auth
 		from .util import util
+		from .admin import admin
 
 		app.register_blueprint(views,url_prefix='/')
 		app.register_blueprint(auth,url_prefix='/')
 		app.register_blueprint(util,url_prefix='/')
+		app.register_blueprint(admin,url_prefix='/admin')
 
 		from .models import Form, User, WebAuthnCredential
 
@@ -28,7 +34,6 @@ def create_app():
 
 		login_manager = LoginManager()
 		login_manager.login_view = 'auth.login'
-		#login_manager.login_view = 'views.debugging'
 		login_manager.init_app(app)
 
 		@login_manager.user_loader
@@ -37,8 +42,3 @@ def create_app():
 
 
 		return app
-
-# def create_database(app):
-# 		if not path.exists('website/' + DB_NAME):
-# 				db.create_all(app=app)
-# 				print('Created Database')

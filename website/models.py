@@ -53,7 +53,7 @@ class WebAuthnCredential(db.Model):
 	__tablename__ = "credential"
 	id = db.Column(db.Integer, primary_key=True)
 	user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-	end_user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+	end_user_id = db.Column(db.Integer, db.ForeignKey("enduser.id"))
 	credential_id = db.Column(db.LargeBinary, nullable=False)
 	credential_public_key = db.Column(db.LargeBinary, nullable=False)
 	current_sign_count = db.Column(db.Integer, default=0)

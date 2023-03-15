@@ -23,7 +23,7 @@ from	webauthn.helpers.structs	import	(
 from	webauthn.helpers.cose	import	COSEAlgorithmIdentifier
 #################################
 # *** customer importing our "SDK" ***
-from . import api
+from website.apis.users import user
 #################################
 auth = Blueprint('auth', __name__)
 
@@ -122,7 +122,7 @@ def	signup():
 @auth.route("/generate-registration-options",	methods=["GET"])
 def	handler_generate_registration_options():
 	print("getting response")
-	resp = api.register("bloclabs.repl.co", "Sample	RP", session["user_uid"], session["email"])
+	resp = user.register("bloclabs.repl.co", "Sample	RP", session["user_uid"], session["email"])
 	print("have response,", resp)
 	print(resp)
 	return resp
@@ -179,7 +179,7 @@ def	handler_generate_registration_options():
 @auth.route("/verify-registration-response",	methods=["POST"])
 def	handler_verify_registration_response():
 	print("IN	VERIFY	REG	OPTIONS")
-	resp = api.verify_reg(rp_id, origin)
+	resp = user.verify_reg(rp_id, origin)
 	return resp
 
 	
