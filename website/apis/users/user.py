@@ -1,6 +1,5 @@
 from flask import request, session, flash, url_for
-from fastapi import FastAPI, Request
-import uvicorn
+from fastapi import Request
 import json
 
 from	webauthn	import	(
@@ -21,16 +20,19 @@ from	webauthn.helpers.cose	import	COSEAlgorithmIdentifier
 from website.app import db
 from website.models import User, WebAuthnCredential, _str_uuid
 from flask_login import login_user, login_required, logout_user, current_user
-
-api = FastAPI(docs_url="/redoc_url")
+from website import api
 
 
 ### User api views
 
 # GETS
-# get all users
+# get all users https://bloc-py-sdk.bloclabs.repl.co/
+@api.get("https://bloc-py-sdk.bloclabs.repl.co/")
+def bloc_sdk_call():
+	return { "message": "Hello world" }
+
 @api.get("/user")
-def get_all_users():
+async def get_all_users():
 	users = User.query.all()
 
 	response_list = []

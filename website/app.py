@@ -1,7 +1,4 @@
-from fastapi import FastAPI
-from fastapi.middleware.wsgi import WSGIMiddleware
-import uvicorn
-from flask import Flask
+from flask import Flask, current_app
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
@@ -10,12 +7,13 @@ from flask_migrate import Migrate
 db = SQLAlchemy()
 migrate = Migrate()
 def create_app():
-		api = FastAPI()
 		app = Flask(__name__)
-		api.mount("/", WSGIMiddleware(app))
 		app.config['SECRET_KEY'] = 'asdfghjkl'
 		app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///db.sqlite3'
 		db.init_app(app)
+		with app.app_context():
+    	# within this block, current_app points to app.
+			print(current_app.name)
 		migrate.init_app(app, db)
 	
 		from .views import views
@@ -40,5 +38,6 @@ def create_app():
 		def load_user(id):
 				return User.query.get(int(id))
 
-
+		
+			
 		return app
