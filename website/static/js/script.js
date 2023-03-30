@@ -51,11 +51,11 @@ document
     resetDebug(dbgRegister);
 
     // Get options
-		console.log("getting options (sripts.js)")
+		console.log("getting options (script.js)")
     const resp = await fetch("/generate-registration-options");
 	  console.log("RESP response: ",resp);
     const opts = await resp.json();
-		console.log("recieved registration response (scripts.js)");
+		console.log("recieved registration response (script.js)");
     printToDebug(
       dbgRegister,
       "Registration Options",
@@ -81,7 +81,7 @@ document
 			
 			console.log(regResp);
 			console.log(typeof regResp);
-	  	console.log("recieved startRegistration(opts) (scripts.js)");
+	  	console.log("recieved startRegistration(opts) (script.js)");
       printToDebug(
         dbgRegister,
         "Registration Response",

@@ -1,3 +1,4 @@
+import requests
 from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 from .models import User, WebAuthnCredential, Credential,	UserAccount, _str_uuid
 from . import db
@@ -65,7 +66,7 @@ session[user.uid] = User(
 
 
 #	A	simple	way	to	persist	challenges	until	response	verification
-current_registration_challenge	=	None
+current_registration_challenge = None
 current_authentication_challenge	=	None
 
 
@@ -119,53 +120,20 @@ def	signup():
 # generate registration options
 @auth.route("/generate-registration-options",	methods=["GET"])
 def	handler_generate_registration_options():
-	
-	print("IN	GENERATE	REG	OPTIONS")
-	global	current_registration_challenge
-	
-
-	
-	# new_user	=	User(uid=session["user_uid"], email=session["email"])
-	# session["new_user"] = new_user
-	# print(session["new_user"])
-	# print(type(session["new_user"]))
-	'''
- 	options	=	generate_registration_options(
-		rp_id=rp_id,
-		rp_name=rp_name,
-		user_id=user.uid,
-		user_name=user.email,
-		exclude_credentials=[{
-				"id":	cred.id,
-				"transports":	cred.transports,
-				"type":	"public-key"
-		}	for	cred	in	user.credentials],
-		authenticator_selection=AuthenticatorSelectionCriteria(
-				user_verification=UserVerificationRequirement.REQUIRED),
-		supported_pub_key_algs=[
-				COSEAlgorithmIdentifier.ECDSA_SHA_256,
-				COSEAlgorithmIdentifier.RSASSA_PKCS1_v1_5_SHA_256,
-		],
-	)
-	'''
-	options	=	generate_registration_options(
-			rp_id=rp_id,
-			rp_name=rp_name,
-			user_id=session["user_uid"],
-			user_name=session["email"],
-			
-			authenticator_selection=AuthenticatorSelectionCriteria(
-					user_verification=UserVerificationRequirement.REQUIRED),
-			supported_pub_key_algs=[
-					COSEAlgorithmIdentifier.ECDSA_SHA_256,
-					COSEAlgorithmIdentifier.RSASSA_PKCS1_v1_5_SHA_256,
-			],
-	)
-	
-	current_registration_challenge	=	options.challenge
-	print(f'options_to_json(options): {options_to_json(options)}')
-	print(f'type options_to_json(options): {type(options_to_json(options))}')
-	return	options_to_json(options)
+	global current_registration_challenge
+	payload = {
+		"domain" : rp_id, 
+		"domain_name" : rp_name,
+		"user_uid" : session["user_uid"],
+		"email" : session["email"]
+	}
+	response = requests.get(url="https://bloc-api.bloclabs.repl.co/users/signup", params=payload).json()
+	response_object = json.loads(response)
+	print(response_object)
+	current_registration_challenge = bytes(response_object["challenge"], 'utf-8')
+	print(type(response))
+	print(response)
+	return response
 
 
 #####################
@@ -173,14 +141,15 @@ def	handler_generate_registration_options():
 @auth.route("/verify-registration-response",	methods=["POST"])
 def	handler_verify_registration_response():
 	print("IN	VERIFY	REG	OPTIONS")
-	global	current_registration_challenge
-	
+	global current_registration_challenge
+	print(current_registration_challenge)
 
 	body	=	request.get_data()
 	print("BODY:	",	type(body))
 	print("BODY:	",body)
 	try:
 		credential = RegistrationCredential.parse_raw(body)
+		print(credential)
 		# check if device used any transports
 		# assign a potentially used transport
 		# user_transports = ''
