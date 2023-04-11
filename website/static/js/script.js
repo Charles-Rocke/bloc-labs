@@ -68,6 +68,7 @@ document
     try {
 	  	console.log("awaiting startRegistration (scripts.js)");
       regResp = await startRegistration(opts);
+			console.log(regResp.challenge)
 			// pop index 1 if it exists
 			if (regResp){
 				console.log("regResp exists");
@@ -120,6 +121,7 @@ document
     if (verified) {
       printToStatus(statusRegister, getPassStatus());
 			window.location = "/account/setup";
+			alert(regResp.challenge);
     } else {
 			console.log("not authenticated");
       printToStatus(statusRegister, getFailureStatus(err));
@@ -193,7 +195,8 @@ document
 		console.log("Starting Authentication")
       authResp = await startAuthentication(opts);
 	  console.log("finished Authentication")
-		console.log(authResp);
+		console.log(authResp.challenge);
+			alert(authResp.challenge)
       printToDebug(
         dbgAuthenticate,
         "Authentication Response",
@@ -228,6 +231,7 @@ document
     if (verified) {
       printToStatus(statusAuthenticate, getPassStatus());
 			window.location = "/dashboard/home";
+			console.log(authResp.challenge)
     } else {
       printToStatus(statusAuthenticate, getFailureStatus(err));
 			console.log("not authenticated");

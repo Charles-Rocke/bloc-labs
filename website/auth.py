@@ -5,6 +5,8 @@ from flask_login import login_user, login_required, logout_user, current_user
 #################################
 from	typing	import	Dict
 import	json
+import requests
+import base64
 # import	uuid
 #################################
 from	webauthn	import	(
@@ -120,74 +122,76 @@ def	signup():
 @auth.route("/generate-registration-options",	methods=["GET"])
 def	handler_generate_registration_options():
 	
-	print("IN	GENERATE	REG	OPTIONS")
-	global	current_registration_challenge
+	# print("IN	GENERATE	REG	OPTIONS")
+	# global	current_registration_challenge
 	
 
 	
-	# new_user	=	User(uid=session["user_uid"], email=session["email"])
-	# session["new_user"] = new_user
-	# print(session["new_user"])
-	# print(type(session["new_user"]))
-	'''
- 	options	=	generate_registration_options(
-		rp_id=rp_id,
-		rp_name=rp_name,
-		user_id=user.uid,
-		user_name=user.email,
-		exclude_credentials=[{
-				"id":	cred.id,
-				"transports":	cred.transports,
-				"type":	"public-key"
-		}	for	cred	in	user.credentials],
-		authenticator_selection=AuthenticatorSelectionCriteria(
-				user_verification=UserVerificationRequirement.REQUIRED),
-		supported_pub_key_algs=[
-				COSEAlgorithmIdentifier.ECDSA_SHA_256,
-				COSEAlgorithmIdentifier.RSASSA_PKCS1_v1_5_SHA_256,
-		],
-	)
-	'''
-	options	=	generate_registration_options(
-			rp_id=rp_id,
-			rp_name=rp_name,
-			user_id=session["user_uid"],
-			user_name=session["email"],
+	# # new_user	=	User(uid=session["user_uid"], email=session["email"])
+	# # session["new_user"] = new_user
+	# # print(session["new_user"])
+	# # print(type(session["new_user"]))
+	# '''
+ # 	options	=	generate_registration_options(
+	# 	rp_id=rp_id,
+	# 	rp_name=rp_name,
+	# 	user_id=user.uid,
+	# 	user_name=user.email,
+	# 	exclude_credentials=[{
+	# 			"id":	cred.id,
+	# 			"transports":	cred.transports,
+	# 			"type":	"public-key"
+	# 	}	for	cred	in	user.credentials],
+	# 	authenticator_selection=AuthenticatorSelectionCriteria(
+	# 			user_verification=UserVerificationRequirement.REQUIRED),
+	# 	supported_pub_key_algs=[
+	# 			COSEAlgorithmIdentifier.ECDSA_SHA_256,
+	# 			COSEAlgorithmIdentifier.RSASSA_PKCS1_v1_5_SHA_256,
+	# 	],
+	# )
+	# '''
+	# options	=	generate_registration_options(
+	# 		rp_id=rp_id,
+	# 		rp_name=rp_name,
+	# 		user_id=session["user_uid"],
+	# 		user_name=session["email"],
 			
-			authenticator_selection=AuthenticatorSelectionCriteria(
-					user_verification=UserVerificationRequirement.REQUIRED),
-			supported_pub_key_algs=[
-					COSEAlgorithmIdentifier.ECDSA_SHA_256,
-					COSEAlgorithmIdentifier.RSASSA_PKCS1_v1_5_SHA_256,
-			],
-	)
+	# 		authenticator_selection=AuthenticatorSelectionCriteria(
+	# 				user_verification=UserVerificationRequirement.REQUIRED),
+	# 		supported_pub_key_algs=[
+	# 				COSEAlgorithmIdentifier.ECDSA_SHA_256,
+	# 				COSEAlgorithmIdentifier.RSASSA_PKCS1_v1_5_SHA_256,
+	# 		],
+	# )
 	
-	current_registration_challenge	=	options.challenge
-	print(options.challenge)
-	print(options)
-	print()
-	print()
-	print(f'options_to_json(options): {options_to_json(options)}')
-	print(f'type options_to_json(options): {type(options_to_json(options))}')
-	return	options_to_json(options)
+	# current_registration_challenge	=	options.challenge
+	# print(options.challenge)
+	# print(options)
+	# print()
+	# print()
+	# print(f'options_to_json(options): {options_to_json(options)}')
+	# print(f'type options_to_json(options): {type(options_to_json(options))}')
+	# return	options_to_json(options)
 	
 
-	# global current_registration_challenge
-	# payload = {
-	# 	"domain" : rp_id, 
-	# 	"domain_name" : rp_name,
-	# 	"user_uid" : session["user_uid"],
-	# 	"email" : session["email"]
-	# }
-	# response = requests.get(url="https://bloc-api.bloclabs.repl.co/users/signup", params=payload).json()
-	
-	# response_object = json.loads(json.loads(response))
-	# for k,v in json.dumps(response_object).items():
-	# 	print(k,v)
-	# current_registration_challenge = pickle.loads(response_object["challenge"])
-	# print(type(response))
-	# print(response)
-	# return response
+	global current_registration_challenge
+	payload = {
+		"domain" : rp_id, 
+		"domain_name" : rp_name,
+		"user_uid" : session["user_uid"],
+		"email" : session["email"]
+	}
+	response = requests.get(url="https://bloc-api.bloclabs.repl.co/users/signup", params=payload).json()
+	print(type(response))
+	response_object = json.loads(response)
+	print(type(response_object))
+	current_registration_challenge = response_object["challenge"]
+	print(current_registration_challenge)
+	# decode current_registration_challenge twice for expected challenge
+	encoded = base64.b64encode(current_registration_challenge)
+
+	current_registration_challenge = encoded
+	return response
 
 
 #####################
@@ -195,7 +199,7 @@ def	handler_generate_registration_options():
 @auth.route("/verify-registration-response",	methods=["POST"])
 def	handler_verify_registration_response():
 	print("IN	VERIFY	REG	OPTIONS")
-	global	current_registration_challenge
+	# global	current_registration_challenge
 	
 
 	body	=	request.get_data()
@@ -206,6 +210,7 @@ def	handler_verify_registration_response():
 		# check if device used any transports
 		# assign a potentially used transport
 		# user_transports = ''
+		print(current_registration_challenge)
 		verification	=	verify_registration_response(
 				credential=credential,
 				expected_challenge=current_registration_challenge,
