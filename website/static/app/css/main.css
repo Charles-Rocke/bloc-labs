@@ -1,4 +1,7 @@
-
+/*
+	Table of Contents:
+		1. Dashboard CSS - Line 51
+*/
 
 
 
@@ -46,6 +49,10 @@ small{
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
 /* DASHBOARD css */
+
+	/* mobile first */
+
+
 .OK{
 	color: lime;
 }
