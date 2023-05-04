@@ -121,7 +121,7 @@ document
 		console.log(typeof {verified, msg});
     if (verified) {
       printToStatus(statusRegister, getPassStatus());
-			window.location = "/account/setup";
+			window.location = "/dashboard/home";
 			
     } else {
 			console.log("not authenticated");

@@ -1,30 +1,49 @@
 {% extends "app/dashboard/base.html" %} {% block title %}dash | home{% endblock title %}
 {% block content %}
-<main class = "expand-lg dash-container d-flex flex-wrap">
-  <div class = "order-2 container dash-container">
-    <!-- Set Field -->
-    <div class = "container limiter">
-      <div class="mb-3">
-        <span class="login100-form-title p-5 container-lg">
-          <h3 class = "company-name">Auth Status</h3>
-          <h4 class = "OK">OK</h4>
-        </span>
-      </div>
-      <!-- Set brand colors -->
-      <span class="login100-form-title p-5 container-lg">
-        <h3 class = "company-name">Successful Logins</h3>
-        <h4 class = "succ-logins">0</h4>
-      </span>
-      <!-- line break -->
-      <br>
-      <!-- Set logo -->
-      <!-- Submit button -->
-      <h4>Make changes?</h4>
-      <button type="button" class=" btn btn-primary btn-submit">Edit</button>
-    </div>
-    <!-- Break -->
-  </div>
-  <!-- User Created Template -->
+<main>
+	<!-- Start of Documentation -->
+	<div class="bloc-doc-container p-2 container-fluid">
+		<!-- Docs Header -->
+		<center>
+			<div class ="container">
+				<h1> Get started with Sign up</h1>
+				<p>bloc is a simple authentication toolkit. Build anything from prototype to production in minutes.</p>
+			</div>
+		</center>
+		<!-- end Docs header -->
+		<!--Signup Docs-->
+		<div class="container d-flex flex-wrap">
+			<div>
+				<h2>Step 1:</h2>
+				<img src="/static/app/images/finished-image.png" class="img-fluid p-3" alt="Goal">
+				<center>
+					<p class="text-muted">
+					Step 1 enables interaction between device and your application</p>
+				</center>
+			</div>
+			<div>
+				<br>
+				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
+					create a new js file in your codebase and copy and paste the code below into it.
+        </p>
+				<h1>All hail the Clipboard API</h1>
+			  <p>Florid, wordly code exposition.</p>
+				<div class="bloc-code-box">
+				  <pre><code class="language-css">.some-box {
+				  width: 20px;
+				  height: 20px;
+				  background: black;
+				  margin-bottom: 1.5rem;
+				}</code></pre>
+				</div>
+			  <p>And I'll tell you another thing..</p>
+			  <pre><code class="language-html">&lt;div class="box drop3"&gt;&lt;/div&gt;</code></pre>
+			  <p>No! Not finished..</p>
+			  <pre><code class="language-javascript">console.log("finished");</code></pre>
+			</div>
+		</div>
+	</div>
+  <!-- User Created Template --
   <div class="limiter order-1">
     <div class="container-login100">
       <div class="wrap-login100">
@@ -62,7 +81,7 @@
     </div>
   </div>
   <div id="dropDownSelect1"></div>
-  </div>
+	<!--end User Created Template -->
 </main>
 <!--===============================================================================================-->
 <script src="static/vendor/jquery/jquery-3.2.1.min.js"></script>
