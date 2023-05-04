@@ -51,10 +51,32 @@ small{
 /* DASHBOARD css */
 
 	/* mobile first */
-
+.docs-dropdown-button{
+	size: 40px !important;
+	font-weight: bold;
+}
 
 .OK{
 	color: lime;
+}
+@media (min-width: 992px) {
+    .bd-sidebar {
+        position:-webkit-sticky;
+        position: sticky;
+        top: 5rem;
+        display: block !important;
+        height: calc(100vh - 6rem);
+        padding-left: .25rem;
+        margin-left: -.25rem;
+        overflow-y: auto
+    }
+}
+
+@media (max-width: 991.98px) {
+    .bd-sidebar .offcanvas-lg {
+        border-right-color:var(--bs-border-color);
+        box-shadow: 0 1rem 3rem rgba(0,0,0,0.175)
+    }
 }
 /* end DASHBOARD css */
 /* cross-platform-img z-index */

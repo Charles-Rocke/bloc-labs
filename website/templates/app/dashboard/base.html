@@ -36,7 +36,7 @@
     <!-- nav bar -->
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm flex-wrap flex-lg-nowrap" id = "mainNav" >
       <div class="container-fluid p-2">
-				<div class="navbar-profile-nav">
+				<div class="navbar-docs-nav">
 					<!-- Docs nav button -->
 					<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDocs" aria-controls="offcanvasDocs">
 	        Docs
@@ -48,12 +48,41 @@
 	        	<img src="/static/app/images/blocImproved.svg" alt="bloc" width="110" height="99" class="logo d-inline-block align-text-top">
 	        </a>
 				</div>
-				<div class="navbar-profile-nav">
+				<!-- Menu button -->
+				<div class="navbar-menu-nav">
 					<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
 	        Menu
 	        	<i class="bi-list"></i>
 	        </button>
 				</div>
+				<!-- start Docs Navigation -->
+				<div class="offcanvas offcanvas-start" tabindex="4" id="offcanvasDocs" aria-labelledby="offcanvasDocsLabel">
+					<div class="offcanvas-header">
+						<h5 class="offcanvas-title" id="offcanvasDocsLabel">Browse Docs</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+					</div>
+					<div class="offcanvas-body">
+						<hr class="d-lg-none text-black-50">
+						{% if user.is_authenticated %}
+						<!-- Docs navbar dropdown button-->
+						<div class="dropdown mt-2 ">
+							<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+								Docs
+							</button>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="{{ url_for('views.dash_home') }}">Sign up</a></li>
+								<hr class="d-lg-none text-black-50">
+								<li><a class="dropdown-item" href="{{ url_for('views.dash_home') }}">Login</a></li>
+							</ul>
+						</div>
+						{% else %}
+						<ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+							<li class="nav-item"><a class="nav-link me-lg-3" href = "{{ url_for('auth.logout') }}">johndoe@email.com</a></li>
+						</ul>
+						{% endif %}
+					</div>
+				</div>
+				<!-- end Docs Navigation -->
 				<!-- start Menu Navigation -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" id="offcanvasRight">
 					<div class="offcanvas-header">
@@ -77,37 +106,9 @@
 	          {% endif %}
 					</div>
         </div>
-				<!-- end Profile Navigation -->
+				<!-- end Menu Navigation -->
       </div>
     </nav>
-		<!-- start Docs Navigation -->
-		<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasDocs" aria-labelledby="offcanvasDocsLabel">
-			<div class="offcanvas-header">
-		    <h5 class="offcanvas-title" id="offcanvasDocsLabel">Docs</h5>
-		    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-		  </div>
-		  <div class="offcanvas-body">
-				<hr class="d-lg-none text-black-50">
-				{% if user.is_authenticated %}
-				<!-- Docs navbar display -->
-				<div class="dropdown mt-3">
-		      <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
-		        Methods
-		      </button>
-		      <ul class="dropdown-menu">
-		        <li><a class="dropdown-item" href="{{ url_for('views.dash_home') }}">Sign up</a></li>
-						<hr class="d-lg-none text-black-50">
-		        <li><a class="dropdown-item" href="{{ url_for('views.dash_home') }}">Login</a></li>
-		      </ul>
-		    </div>
-				{% else %}
-				<ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-					<li class="nav-item"><a class="nav-link me-lg-3" href = "{{ url_for('auth.logout') }}">johndoe@email.com</a></li>
-				</ul>
-				{% endif %}
-			</div>
-		</div>
-		<!-- end Docs Navigation -->
     <!-- Main content-->
       {% block content %}
       {% endblock content %}
