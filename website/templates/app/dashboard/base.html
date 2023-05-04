@@ -34,58 +34,104 @@
   </head>
   <body>
     <!-- nav bar -->
-    <nav class="navbar navbar-expand-lg navbar-light shadow-sm" id = "mainNav" >
-      <div class="container">
-        <a class="navbar-brand fw-bold" href="{{ url_for('views.dash_home') }}">
-        <img src="/static/images/blocImproved.svg" alt="bloc" width="110" height="99" class="logo d-inline-block align-text-top">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="bi-list"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          {% if user.is_authenticated %}
-          <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-            <li class="nav-item"><a class="nav-link me-lg-3" href="#Authenticated">{{ user.email }}</a></li>
-						<li class="nav-item"><a class="nav-link me-lg-3" href="{{ url_for('views.dash_home') }}">home</a></li>
-						<li class="nav-item"><a class="nav-link me-lg-3" href="/#features">payments</a></li>
-            <li class="nav-item"><a class="nav-link me-lg-3" href="/#features">settings</a></li>
-            <li class="nav-item"><a class="nav-link me-lg-3" href="{{ url_for('views.pricing') }}">support</a></li>
-            <li class="nav-item"><a class="nav-link me-lg-3" href = "{{ url_for('auth.logout') }}">logout</a></li>
-          </ul>
-          {% else %}
-          <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-					 	<li class="nav-item"><a class="nav-link me-lg-3" href = "{{ url_for('auth.logout') }}">johndoe@email.com</a></li>
-          </ul>
-          {% endif %}
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm flex-wrap flex-lg-nowrap" id = "mainNav" >
+      <div class="container-fluid p-2">
+				<div class="navbar-profile-nav">
+					<!-- Docs nav button -->
+					<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDocs" aria-controls="offcanvasDocs">
+	        Docs
+	        	<i class="bi-list"></i>
+	        </button>
+				</div>
+				<div class = "nav-logo">
+					<a class="navbar-brand fw-bold" href="{{ url_for('views.dash_home') }}">
+	        	<img src="/static/app/images/blocImproved.svg" alt="bloc" width="110" height="99" class="logo d-inline-block align-text-top">
+	        </a>
+				</div>
+				<div class="navbar-profile-nav">
+					<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+	        Menu
+	        	<i class="bi-list"></i>
+	        </button>
+				</div>
+				<!-- start Menu Navigation -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" id="offcanvasRight">
+					<div class="offcanvas-header">
+				    <h5 class="offcanvas-title" id="offcanvasRightLabel">Menu</h5>
+				    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+				  </div>
+					<div class="offcanvas-body">
+	          {% if user.is_authenticated %}
+	          <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+	            <li class="nav-item"><a class="nav-link me-lg-3" href="#Authenticated">{{ user.email }}</a></li>
+							<li class="nav-item"><a class="nav-link me-lg-3" href="{{ url_for('views.dash_home') }}">home</a></li>
+							<li class="nav-item"><a class="nav-link me-lg-3" href="/#features">payments</a></li>
+	            <li class="nav-item"><a class="nav-link me-lg-3" href="/#features">settings</a></li>
+	            <li class="nav-item"><a class="nav-link me-lg-3" href="{{ url_for('views.pricing') }}">support</a></li>
+	            <li class="nav-item"><a class="nav-link me-lg-3" href = "{{ url_for('auth.logout') }}">logout</a></li>
+	          </ul>
+	          {% else %}
+	          <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+						 	<li class="nav-item"><a class="nav-link me-lg-3" href = "{{ url_for('auth.logout') }}">johndoe@email.com</a></li>
+	          </ul>
+	          {% endif %}
+					</div>
         </div>
+				<!-- end Profile Navigation -->
       </div>
     </nav>
+		<!-- start Docs Navigation -->
+		<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasDocs" aria-labelledby="offcanvasDocsLabel">
+			<div class="offcanvas-header">
+		    <h5 class="offcanvas-title" id="offcanvasDocsLabel">Docs</h5>
+		    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		  </div>
+		  <div class="offcanvas-body">
+				<hr class="d-lg-none text-black-50">
+				{% if user.is_authenticated %}
+				<!-- Docs navbar display -->
+				<div class="dropdown mt-3">
+		      <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+		        Methods
+		      </button>
+		      <ul class="dropdown-menu">
+		        <li><a class="dropdown-item" href="{{ url_for('views.dash_home') }}">Sign up</a></li>
+						<hr class="d-lg-none text-black-50">
+		        <li><a class="dropdown-item" href="{{ url_for('views.dash_home') }}">Login</a></li>
+		      </ul>
+		    </div>
+				{% else %}
+				<ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+					<li class="nav-item"><a class="nav-link me-lg-3" href = "{{ url_for('auth.logout') }}">johndoe@email.com</a></li>
+				</ul>
+				{% endif %}
+			</div>
+		</div>
+		<!-- end Docs Navigation -->
     <!-- Main content-->
       {% block content %}
       {% endblock content %}
     <!-- Footer-->
     <!--===============================================================================================-->
-    <script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="/static/app/vendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->
-    <script src="/static/vendor/animsition/js/animsition.min.js"></script>
+    <script src="/static/app/vendor/animsition/js/animsition.min.js"></script>
     <!--===============================================================================================-->
-    <script src="/static/vendor/bootstrap/js/popper.js"></script>
-    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+		
+    <script src="/static/app/vendor/bootstrap/js/popper.js"></script>
+    <script src="/static/app/vendor/bootstrap/js/bootstrap.min.js"></script>
     <!--===============================================================================================-->
-    <script src="/static/vendor/select2/select2.min.js"></script>
+    <script src="/static/app/vendor/select2/select2.min.js"></script>
     <!--===============================================================================================-->
-    <script src="/static/vendor/daterangepicker/moment.min.js"></script>
-    <script src="/static/vendor/daterangepicker/daterangepicker.js"></script>
+    <script src="/static/app/vendor/daterangepicker/moment.min.js"></script>
+    <script src="/static/app/vendor/daterangepicker/daterangepicker.js"></script>
     <!--===============================================================================================-->
-    <script src="/static/vendor/countdowntime/countdowntime.js"></script>
+    <script src="/static/app/vendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
     <script src="/static/js/main.js"></script>
     <!-- JS -->
     <script src="/static/app/js/setup.js"></script>
 		<script src="/static/js/util.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-      crossorigin="anonymous"></script>
+   	
   </body>
 </html>

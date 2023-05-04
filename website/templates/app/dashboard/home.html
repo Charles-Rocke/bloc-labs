@@ -1,7 +1,7 @@
 {% extends "app/dashboard/base.html" %} {% block title %}dash | home{% endblock title %}
 {% block content %}
-<main class = "dash-container">
-  <div class = "container dash-container">
+<main class = "dash-container d-flex flex-wrap">
+  <div class = "order-2 container dash-container">
     <!-- Set Field -->
     <div class = "container limiter">
       <div class="mb-3">
@@ -25,7 +25,7 @@
     <!-- Break -->
   </div>
   <!-- User Created Template -->
-  <div class="limiter">
+  <div class="limiter order-1">
     <div class="container-login100">
       <div class="wrap-login100">
         <form method = "POST" action = "#" class="login100-form validate-form">
