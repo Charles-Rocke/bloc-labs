@@ -1,29 +1,14 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, session
-from .models import User, WebAuthnCredential, Credential,	UserAccount, _str_uuid
+from .models import User, _str_uuid
 from . import db
-from flask_login import login_user, login_required, logout_user, current_user
+from flask_login import login_user, logout_user, current_user
 #################################
-from	typing	import	Dict
 import	json
 import requests
 import base64
-import secrets
+
 # import	uuid
 #################################
-from	webauthn	import	(
-		generate_registration_options,
-		verify_registration_response,
-		generate_authentication_options,
-		verify_authentication_response,
-		options_to_json,
-)
-from	webauthn.helpers.structs	import	(
-		AuthenticatorSelectionCriteria,
-		UserVerificationRequirement,
-		RegistrationCredential,
-		AuthenticationCredential,
-)
-from	webauthn.helpers.cose	import	COSEAlgorithmIdentifier
 
 #################################
 auth = Blueprint('auth', __name__)
@@ -31,17 +16,18 @@ auth = Blueprint('auth', __name__)
 
 ################
 #
-#	RP	Configuration & Other Settings
+#	Configuration & Other Settings
 #
 ################
-#	customers	domain
-rp_id	=	"bloclabs.repl.co"
-#	customer	origin	site
-origin	=	"https://bloc.bloclabs.repl.co"
-#origin	=	"https://bloc.id"
-rp_name	=	"Sample	RP"
 
-#	A	simple	way	to	persist	challenges	until	response	verification
+#	your	domain
+rp_id	=	"yourdomain.com"
+#	your origin	site (basically just adding https:// if you don't use a sub-domain)
+origin	=	"https://yourdomain.com"
+# your site name
+rp_name	=	"your domain name"
+
+#	A	simple	way	to	persist	challenges	until	response	verification (extra layer of security that is required to use the api)
 current_registration_challenge	=	None
 current_authentication_challenge	=	None
 

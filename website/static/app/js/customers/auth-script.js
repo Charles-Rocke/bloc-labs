@@ -4,12 +4,12 @@ const { startSignup, startLogin } = blocJS;
  * Signup Button
  */
 document
-	// 1.EDIT your Signup button html 'id' below
-  .getElementById("btnRegister")
+	// 1. EDIT your Signup button html 'id' below
+  .getElementById("yourSignupBtnIDHere")
   .addEventListener("click", async () => {
     /* Generate signup options for your user */
 		// 2. EDIT this fetch request your route that will make the api request to our server
-    const resp = await fetch("/generate-registration-options");
+    const resp = await fetch("/your-signup-route-here");
     const opts = await resp.json();
     // Start WebAuthn Registration
     let regResp;
@@ -30,7 +30,7 @@ document
     /* Send response to server */
 		// 3. EDIT this fetch request your route that will make the api request to our server
     const verificationResp = await fetch(
-      "/verify-registration-response",
+      "/your-verify-signup-route-here",
       {
         method: "POST",
 				mode: 'cors',
@@ -46,7 +46,7 @@ document
     if (verified) {
 			/* Redirect to your "login required" page */
 			// 4. EDIT this location to redirect the user to your login required page
-			window.location = "/dashboard/home";
+			window.location = "/your/redirect/location/here";
     } else {
 			console.log("not authenticated");
     }
@@ -57,12 +57,12 @@ document
  * Login Button
  */
 document
-	// 5.EDIT your Login button html 'id' below
-  .getElementById("btnAuthenticate")
+	// 5. EDIT your Login button html 'id' below
+  .getElementById("yourLoginBtnIDHere")
   .addEventListener("click", async () => {
     /* Generate login options for your user */
 		// 6. EDIT this fetch request your route that will make the api request to our server
-    const resp = await fetch("/generate-authentication-options");
+    const resp = await fetch("/your-login-route-here");
     const opts = await resp.json();
     // Start bloc Login
     let authResp;
@@ -74,7 +74,7 @@ document
     /* Send response to server */
 		// 7. EDIT this fetch request your route that will make the api request to our server
     const verificationResp = await fetch(
-      "/verify-authentication-response",
+      "/your-verify-login-route-here",
       {
         method: "POST",
         headers: {
@@ -89,7 +89,7 @@ document
 		if (verified) {
 			/* Redirect to your "login required" page */
 			// 8. EDIT this location to redirect the user to your login required page
-			window.location = "/dashboard/home";
+			window.location = "/your/redirect/location/here";
     } else {
 			console.log("not authenticated");
     }

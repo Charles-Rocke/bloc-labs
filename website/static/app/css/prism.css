@@ -1,5 +1,6 @@
 /* PrismJS 1.29.0
-https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript&plugins=highlight-keywords+toolbar+copy-to-clipboard+download-button */
+https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript+python&plugins=show-language+highlight-keywords+toolbar+copy-to-clipboard+download-button */
+
 /* bloc Font */
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300&family=Gruppo&display=swap');
 
@@ -125,27 +126,24 @@ div.code-toolbar>.toolbar>.toolbar-item>a:focus,div.code-toolbar>.toolbar>.toolb
     text-decoration:none
 }
 
-
 /* My additions */
-pre{
-	border-radius: 5px;
-	box-sizing: border-box;
-	overflow-x: auto;
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
-  word-wrap: break-word;
+ pre{
+     border-radius: 5px;
+     box-sizing: border-box;
+     overflow-x: auto;
+     white-space: pre-wrap;
+     white-space: -moz-pre-wrap;
+     white-space: -pre-wrap;
+     white-space: -o-pre-wrap;
+     word-wrap: break-word;
 }
-
-code {
-    display: inline-block;
+ code {
+     display: inline-block;
 }
-
-.copy-to-clipboard{
-	position: absolute;
-	height: 1rem;
-	width: 1rem;
-	right: 5px;
-	cursor: pointer;
+ .copy-to-clipboard{
+     position: absolute;
+     height: 1rem;
+     width: 1rem;
+     right: 5px;
+     cursor: pointer;
 }
