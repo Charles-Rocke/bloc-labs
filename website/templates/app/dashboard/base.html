@@ -37,15 +37,8 @@
     <!-- nav bar -->
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm flex-wrap flex-lg-nowrap" id = "mainNav" >
       <div class="container-fluid p-2">
-				<div class="navbar-docs-nav">
-					<!-- Docs nav button -->
-					<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDocs" aria-controls="offcanvasDocs">
-	        Docs
-	        	<i class="bi-list"></i>
-	        </button>
-				</div>
 				<div class = "nav-logo">
-					<a class="navbar-brand fw-bold" href="{{ url_for('views.dash_home') }}">
+					<a class="navbar-brand fw-bold" href="{{ url_for('views.docs_signup') }}">
 	        	<img src="/static/app/images/blocImproved.svg" alt="bloc" width="110" height="99" class="logo d-inline-block align-text-top">
 	        </a>
 				</div>
@@ -56,34 +49,6 @@
 	        	<i class="bi-list"></i>
 	        </button>
 				</div>
-				<!-- start Docs Navigation -->
-				<div class="offcanvas offcanvas-start" tabindex="4" id="offcanvasDocs" aria-labelledby="offcanvasDocsLabel">
-					<div class="offcanvas-header">
-						<h5 class="offcanvas-title" id="offcanvasDocsLabel">Browse Docs</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-					</div>
-					<div class="offcanvas-body">
-						<hr class="d-lg-none text-black-50">
-						{% if user.is_authenticated %}
-						<!-- Docs navbar dropdown button-->
-						<div class="dropdown mt-2 ">
-							<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
-								Docs
-							</button>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="{{ url_for('views.dash_home') }}">Sign up</a></li>
-								<hr class="d-lg-none text-black-50">
-								<li><a class="dropdown-item" href="{{ url_for('views.dash_home') }}">Login</a></li>
-							</ul>
-						</div>
-						{% else %}
-						<ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-							<li class="nav-item"><a class="nav-link me-lg-3" href = "{{ url_for('auth.logout') }}">johndoe@email.com</a></li>
-						</ul>
-						{% endif %}
-					</div>
-				</div>
-				<!-- end Docs Navigation -->
 				<!-- start Menu Navigation -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" id="offcanvasRight">
 					<div class="offcanvas-header">
@@ -93,12 +58,29 @@
 					<div class="offcanvas-body">
 	          {% if user.is_authenticated %}
 	          <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-	            <li class="nav-item"><a class="nav-link me-lg-3" href="#Authenticated">{{ user.email }}</a></li>
-							<li class="nav-item"><a class="nav-link me-lg-3" href="{{ url_for('views.dash_home') }}">home</a></li>
-							<li class="nav-item"><a class="nav-link me-lg-3" href="/#features">payments</a></li>
-	            <li class="nav-item"><a class="nav-link me-lg-3" href="/#features">settings</a></li>
-	            <li class="nav-item"><a class="nav-link me-lg-3" href="{{ url_for('views.pricing') }}">support</a></li>
-	            <li class="nav-item"><a class="nav-link me-lg-3" href = "{{ url_for('auth.logout') }}">logout</a></li>
+							<!-- Docs navbar dropdown button-->
+							<div class="dropdown ">
+								<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+									Docs
+								</button>
+								<ul class="dropdown-menu">
+									<li class="dropdown-item"><a class="nav-link me-lg-3" href="{{ url_for('views.docs_signup') }}">Sign up</a></li>
+									<li class="dropdown-item"><a class="nav-link me-lg-3" href="{{ url_for('views.docs_login') }}">Login</a></li>
+								</ul>
+							</div>
+							<!-- Docs navbar dropdown button-->
+						<div class="dropdown ">
+							<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+								Profile
+							</button>
+							<ul class="dropdown-menu">
+								<li class="dropdown-item"><a class="nav-link me-lg-3" href="#">{{ user.email }}</a></li>
+								<li class="dropdown-item"><a class="nav-link me-lg-3" href="#">payments</a></li>
+		            <li class="dropdown-item"><a class="nav-link me-lg-3" href="#">settings</a></li>
+		            <li class="dropdown-item"><a class="nav-link me-lg-3" href="#"">support</a></li>
+							</ul>
+						</div>
+	            <li class="nav-item"><a class="btn" href = "{{ url_for('auth.logout') }}">logout</a></li>
 	          </ul>
 	          {% else %}
 	          <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">

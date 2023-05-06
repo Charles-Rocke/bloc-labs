@@ -35,31 +35,20 @@ def	account_setup():
 
 ################
 #
-#	App	Dash	Views
+#	App	Docs	Views
 #
 ################
-@views.route("/dashboard/home",	methods=["GET",	"POST"])
+# signup
+@views.route("/docs/signup",	methods=["GET",	"POST"])
 @login_required
-def	dash_home():
-	# save form
-	if request.method == 'POST':
-		header = request.form.get('header')
-		field_name = request.form.get('field-name')
-		primary_color = request.form.get('primary')
-		secondary_color = request.form.get('secondary')
-		company_name = request.form.get('company-name')
-		
-		new_form = Form(header=header, field_name=field_name, primary_color=primary_color, secondary_color=secondary_color, company_name=company_name, user_id=current_user.id)
-		db.session.add(new_form)
-		db.session.commit()
-		
-		for form in current_user.forms:
-				print("company name: ", form)
-			
-		flash('Form created!', category='success')
-		return	render_template("app/dashboard/home.html", user = current_user)
-		
-	return	render_template("app/dashboard/home.html", user = current_user)
+def	docs_signup():
+	return	render_template("app/dashboard/docs/signup.html", user = current_user)
+
+# login
+@views.route("/docs/login",	methods=["GET",	"POST"])
+@login_required
+def	docs_login():
+	return	render_template("app/dashboard/docs/login.html", user = current_user)
 
 
 ################

@@ -46,7 +46,7 @@ document
     if (verified) {
 			/* Redirect to your "login required" page */
 			// 4. EDIT this location to redirect the user to your login required page
-			window.location = "/dashboard/home";
+			window.location = "/docs/signup";
     } else {
 			console.log("not authenticated");
     }
@@ -89,7 +89,7 @@ document
 		if (verified) {
 			/* Redirect to your "login required" page */
 			// 8. EDIT this location to redirect the user to your login required page
-			window.location = "/dashboard/home";
+			window.location = "/docs/login";
     } else {
 			console.log("not authenticated");
     }

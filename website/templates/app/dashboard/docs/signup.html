@@ -5,11 +5,12 @@
   <div class="bloc-doc-container p-2 container-fluid">
     <!-- Docs Header -->
     <center>
-      <div class ="container">
+      <div class ="container pt-5">
         <h1> Get started with Sign up</h1>
-        <p>bloc is a simple authentication toolkit. Build anything from prototype to production in minutes.</p>
+        <p class="lead fw-normal text-muted mb-5 mb-lg-0">bloc is a simple authentication toolkit. Build anything from prototype to production in minutes.</p>
       </div>
     </center>
+		<br>
     <!-- end Docs header -->
     <!--Signup Docs-->
     <div class="container">
@@ -17,12 +18,12 @@
         <h2>Step 1: JavaScript</h2>
         <img src="/static/app/images/finished-image.png" class="img-fluid p-3" alt="Goal">
         <center>
-          <p class="text-muted">
+          <p class="lead fw-normal text-muted mb-5 mb-lg-0">
             Step 1 enables interaction between device and your application
           </p>
         </center>
       </div>
-      <div class = "container">
+      <div>
         <br>
         <p class="lead fw-normal text-muted mb-5 mb-lg-0">
           First copy the code below to enable interaction between your application and your users device.
@@ -34,7 +35,7 @@
 				<!-- Start enable Send and Recieve webauthn data -->
 				<br>
 				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
-					Next copy the code below to send and recieve data to and from our api. You will need to edit 8 parts, which you can easily find by ctrl + f (windows) or command + f (mac) and enter 'EDIT' to search for all 8.
+					Next copy the code below to send and recieve data to and from our api. You will need to edit 8 parts, which you can easily find by ctrl + f (windows) or command + f (mac) and enter 'EDIT' to search for all 8. This will be referred to as 'auth-script' throughout the docs.
 				</p>
 				<div class="bloc-code-box">
 					<pre><code class="language-javascript">// import blocJS auth methods
@@ -144,16 +145,28 @@ document
 	        <h2>Step 2: Server side</h2>
 	        <img src="/static/app/images/finished-image.png" class="img-fluid p-3" alt="Goal">
 	        <center>
-	          <p class="text-muted">
+	          <p class="lead fw-normal text-muted mb-5 mb-lg-0">
 	            Step 2 enables complete authentication between device and your application
 	          </p>
 	        </center>
 	      </div>
 				<br>
         <p class="lead fw-normal text-muted mb-5 mb-lg-0">
-          Note: Python will be used for easy reading. Also, all of the code below is within ONE file. You can set environment variables if you'd like but for simplicity, all the code below is within ONE file.
+          Note: Python's Flask web framework will be used for easy reading. It is already installed so those steps have been skipped. Flask's login manager is being used for easy session handling. If you have built sessions yourself, that's ok, continue through and you will see where your equivalent will be.
 					<br>
+					Also, all of the code below is within ONE file. You can set environment variables if you'd like but for simplicity, all the code below is within ONE file.
 					<br>
+					If you are using Flask (good taste btw 🤓), then import the following because you will use them later.
+				</p>
+					<div class="bloc-code-box">
+	          <pre><code class="language-python" data-prismjs-copy="Copy">from flask import session, url_for, request, redirect
+import	json
+import requests
+import base64</code></pre>
+				</div>
+				<br>
+				<h3>Settings</h3>
+				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
 					First you will need to configure some settings that are crucial to a secure authentication system. The code below demonstrates exactly what you would need in Python.
         </p>
         <div class="bloc-code-box">
@@ -167,6 +180,98 @@ rp_name	=	"your domain name"
 #	A	simple	way	to	persist	challenges	until	response	verification (extra layer of security that is required to use the api)
 current_registration_challenge	=	None
 current_authentication_challenge	=	None</code></pre>
+				</div>
+				<br>
+				<h3>Signup Flow</h3>
+				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
+					Next, you will be setting up the signup flow. You will use routes in this order, recieving users email, proccesing users email, and sending that users email to the api to initiate and verify the signup authentication  (yes we know...very tedious, but for now that's what it will be to ensure success)
+        </p>
+				<br>
+				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
+					The first route, recieving, is simply displaying a page with an input field like below. After you build this route, go into your 'auth-script' and do "1. EDIT".
+        </p>
+				<img src="/static/app/images/signup_email.jpg" class="img-fluid p-3" alt="Goal">
+				<!-- building server email processing -->
+				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
+					Now, build the proccesing route like below. This route is processing the email that will be submitted by your user. After you build this route, go into your 'auth-script' and do "2. EDIT". Be sure to include the leading / for the route you built.
+        </p>
+        <div class="bloc-code-box">
+          <pre><code class="language-python" data-prismjs-copy="Copy"># incoming post request from recieving view
+	if	request.method	==	"POST":
+		# add email to your session
+		session['users_email']	=	request.form.get("name_of_your_input_field_here")
+		# redirect to user next route to send to api 
+		return redirect(url_for('your.redirect_route_here'))</code></pre>
+				</div>
+				<!-- building signup generation -->
+				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
+					This next part is both of the last parts. First, this route is sending the data to the api. Then building the next route that will be used to verify the signup (as you can see, security is heavily baked in).
+					After you build this route, go into your 'auth-script' and do "3. EDIT".
+        </p>
+        <div class="bloc-code-box">
+          <pre><code class="language-python" data-prismjs-copy="Copy"># payload
+	payload = {
+		"domain" : rp_id, 
+		"domain_name" : rp_name,
+		"email" : session["email"]
+	}
+	# recieve bloc api response
+	response = requests.get(url="https://bloc-api.bloclabs.repl.co/users/signup", params=payload).json()
+	# turn response into a python dictionary 
+	response_object = json.loads(response)
+	# set registration challenge
+	current_registration_challenge = response_object["challenge"]
+	# decode registration challenge to expected challenge (the 3 ='s at the end are EXTREMELY IMPORTANT and NEED TO BE ADDED IN)
+	current_registration_challenge = base64.urlsafe_b64decode(f"{current_registration_challenge}===")
+	# return response to bloc js package, this is returning to '2. EDIT' if you cntl + f or command + f
+	return response</code></pre>
+				</div>
+				<!-- building signup generation -->
+				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
+					2nd part and lastly, the next route is signup verification.
+					After you build this route, go into your 'auth-script' and do "4. EDIT".
+        </p>
+        <div class="bloc-code-box">
+          <pre><code class="language-python" data-prismjs-copy="Copy"># data from coming from blocJS, '3. EDIT'
+body	=	request.get_data()
+# your payload for the api
+payload = {
+	"request" : body,
+	"domain" : rp_id,
+	"origin" : origin,
+	"user" : session["email"],
+}
+# recieve response from post request
+response = requests.post(url="https://bloc-api.bloclabs.repl.co/users/verify_signup", params= payload).json()
+# if user is verified
+if response["verified"] == True:
+	# creating a new user object from your database
+	new_user	=	YourUserModel(email=session["email"])
+	# add and commit your user to your database
+	db.session.add(new_user)
+	db.session.commit()
+	# login your user to your application
+	# those who manually built their sessions, login user at this part of your authentication flow
+	login_user(new_user,	remember=True)
+	# flask feature to show user that they successfully signed up
+	flash('Account created!', category = 'success')
+	# return this response to '3. EDIT'
+	return response
+# otherwise they won't be logged in
+else:
+	return {"verified":False}</code></pre>
+				</div>
+				<br>
+				<center>
+		      <div class ="container">
+		        <h1> Congratulations!!</h1>
+		        <p class="lead fw-normal text-muted mb-lg-0">Your signup is done, now it's time to build login. IT IS PRETTY MUCH EXACTLY LIKE THIS FLOW just much shorter. Hang in there a little longer, it's almost over</p>
+						<br>
+						<div class="button"><a class="btn startup-price-btn" href="{{ url_for('views.docs_login') }}">Next</a></div>
+						<br>
+		      </div>
+		    </center>
+				<!-- everything before the below div -->
       </div>
     </div>
   </div>
