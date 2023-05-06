@@ -43,13 +43,13 @@
 				<img src="/static/app/images/login_email.jpg" class="img-fluid p-3" alt="Goal">
 				<!-- building server email processing -->
 				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
-					Now, build the proccesing route like below. This route is processing the email that will be submitted by your user.
+					Now, build the proccesing route like below. This route is processing the email that will be submitted by your user. Make sure to redirect to this current route (this is important)
         </p>
         <div class="bloc-code-box">
           <pre><code class="language-python" data-prismjs-copy="Copy">if request.method == 'POST':
 		# add email to your session
 		session['email'] = request.form.get("name_of_your_login_input_field_here")
-		# redirect to user next route to send to api 
+		# redirect to user next route to send to api (to this current route)
 		return redirect(url_for('your.redirect_route_here'))</code></pre>
 				</div>
 				<!-- building login generation -->
