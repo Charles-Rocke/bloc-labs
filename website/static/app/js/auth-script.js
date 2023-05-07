@@ -1,9 +1,6 @@
 // import blocJS auth methods
-const { startSignup, startLogin, browserSupportsWebAuthnAutofill } = blocJS;
+const { startSignup, startLogin } = blocJS;
 
-if (!browserSupportsWebAuthn()) {
-	console.log('It seems this browser does not support WebAuthn...');
-}
 /**
  * Signup Button
  */
