@@ -20,9 +20,9 @@ auth = Blueprint('auth', __name__)
 #
 ################
 
-#	your	domain
+#	your base	domain, DO NOT include an ending /
 rp_id	=	"yourdomain.com"
-#	your origin	site (basically just adding https:// if you don't use a sub-domain)
+#	your origin	site (basically just adding https:// if you don't use a sub-domain), DO NOT include an ending /
 origin	=	"https://yourdomain.com"
 # your site name
 rp_name	=	"your domain name"

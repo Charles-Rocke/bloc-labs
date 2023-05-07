@@ -48,9 +48,13 @@ small{
 /* end bloc logo */
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
-/* DASHBOARD css */
+/* DASHBOARD DOCS css */
 
 	/* mobile first */
+.btn-lg{
+	width: 500px;
+}
+
 .docs-dropdown-button{
 	size: 40px !important;
 	font-weight: bold;
