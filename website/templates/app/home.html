@@ -1,5 +1,10 @@
 {% extends "app/base.html" %} {% block title %}bloc | home{% endblock title %}
 {% block content %}
+<!-- tracking page views -->
+<script>
+	// Send a default page view event with additional properties
+	mixpanel.track_pageview({"page": "Landing Page"});
+</script>
 <!-- Mashead header-->
 <header class="masthead">
   <div class="container px-1">
