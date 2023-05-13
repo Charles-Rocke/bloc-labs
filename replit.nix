@@ -1,5 +1,7 @@
 { pkgs }: {
   deps = [
+    pkgs.systemd
+    pkgs.docker
     pkgs.nodejs-16_x
     pkgs.sqlite.bin
     pkgs.python38Full
@@ -18,3 +20,4 @@
     LANG = "en_US.UTF-8";
   };
 }
+
