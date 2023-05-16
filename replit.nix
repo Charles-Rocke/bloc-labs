@@ -1,8 +1,11 @@
 { pkgs }: {
   deps = [
+<<<<<<< HEAD
     pkgs.heroku
     pkgs.systemd
     pkgs.docker
+=======
+>>>>>>> parent of 8c6fed2... added requirements.txt( heroku)
     pkgs.nodejs-16_x
     pkgs.sqlite.bin
     pkgs.python38Full
@@ -17,8 +20,7 @@
       # Needed for matplotlib
       pkgs.xorg.libX11
     ];
-    PYTHONBIN = "${pkgs.python38Full}/bin/python3.9";
+    PYTHONBIN = "${pkgs.python38Full}/bin/python3.8";
     LANG = "en_US.UTF-8";
   };
 }
-

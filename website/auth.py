@@ -227,7 +227,7 @@ def	hander_verify_authentication_response():
 	print("response")
 	# get response from post request and print it
 	response = requests.post(url="https://bloc-api.bloclabs.repl.co/bloc/users/verify_login", params= payload).json()
-	print(response)
+
 	"""If user is verified """
 	if response["verified"] == True:
 		print(response)
