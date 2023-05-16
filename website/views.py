@@ -13,7 +13,7 @@ views = Blueprint('views', __name__)
 #	Home
 @views.route("/",	methods=["GET",	"POST"])
 def	home():
-	return	render_template("app/home.html", user = current_user)
+	return	render_template("app/index.html", user = current_user)
 
 #	Pricing
 @views.route("/pricing",	methods=["GET",	"POST"])
