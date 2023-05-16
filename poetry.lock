@@ -448,7 +448,11 @@ asn1crypto = ">=1.4.0"
 cbor2 = ">=5.4.2.post1"
 cryptography = ">=39.0.1"
 pydantic = ">=1.9.0"
+<<<<<<< HEAD
 pyOpenSSL = ">=23.0.0"
+=======
+pyOpenSSL = ">=22.0.0"
+>>>>>>> parent of 8c6fed2... added requirements.txt( heroku)
 
 [[package]]
 name = "werkzeug"
@@ -484,6 +488,9 @@ content-hash = "95e64025f7b1fcbf5a20099ea1ba42eefd6d693102cff1db2c27b2520396344b
 =======
 python-versions = ">=3.8.0,<3.9"
 content-hash = "58bf331bd57532c1200a5ff8b03cdb28361cfd4c97e9935b5514f6700f0d5be3"
+<<<<<<< HEAD
+>>>>>>> parent of 8c6fed2... added requirements.txt( heroku)
+=======
 >>>>>>> parent of 8c6fed2... added requirements.txt( heroku)
 
 [metadata.files]

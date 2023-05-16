@@ -1,12 +1,5 @@
 { pkgs }: {
   deps = [
-<<<<<<< HEAD
-    pkgs.heroku
-    pkgs.systemd
-    pkgs.docker
-=======
->>>>>>> parent of 8c6fed2... added requirements.txt( heroku)
-    pkgs.nodejs-16_x
     pkgs.sqlite.bin
     pkgs.python38Full
   ];
