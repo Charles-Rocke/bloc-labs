@@ -2,6 +2,6 @@
 .venv
 .vscode
 __pycache__
-#/instance/data.db
+website/db.sqlite3
 *.pyc
 .DS_Store
