@@ -17,7 +17,7 @@
       # Needed for matplotlib
       pkgs.xorg.libX11
     ];
-    PYTHONBIN = "${pkgs.python38Full}/bin/python3.8";
+    PYTHONBIN = "${pkgs.python38Full}/bin/python3.9";
     LANG = "en_US.UTF-8";
   };
 }
