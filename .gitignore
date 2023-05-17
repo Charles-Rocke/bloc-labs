@@ -1,0 +1,8 @@
+.env
+.venv
+.vscode
+__pycache__
+*.pyc
+.DS_Store
+poetry.lock
+pyproject.toml
