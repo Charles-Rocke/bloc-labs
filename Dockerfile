@@ -11,7 +11,7 @@ COPY requirements.txt .
 # what to run at the begining of the image
 # copy contents from current directory
 COPY . .
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
+RUN pip install --upgrade -r requirements.txt
 # what commands should run when container starts
 # CMD ["/bin/bash", "docker-entrypoint.sh"]
 # configure the container to run in an executed manner
