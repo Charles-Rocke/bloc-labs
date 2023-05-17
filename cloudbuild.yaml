@@ -29,7 +29,7 @@ steps:
 
   # [START cloudbuild_python_image_yaml]
   # Docker Build
-  - name: 'gcr.io/cloud-builders/docker'
+  - name: 'gcr.io/bloc-labs-cloud-builders/docker'
     args: ['build', '-t', 
            'global-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY_REPO}/myimage:${SHORT_SHA}', '.']
   # [END cloudbuild_python_image_yaml]
