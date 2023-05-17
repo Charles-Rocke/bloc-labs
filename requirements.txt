@@ -45,6 +45,7 @@ mixpanel==4.10.0
 msgpack==1.0.4
 multidict==6.0.2
 numpy==1.22.2
+packaging==21.3
 parso==0.8.3
 pastel==0.2.1
 pexpect==4.8.0
