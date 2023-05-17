@@ -3,6 +3,5 @@
 .vscode
 __pycache__
 *.pyc
-website/db.sqlite3
 .DS_Store
 
