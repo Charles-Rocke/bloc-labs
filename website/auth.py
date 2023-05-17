@@ -110,7 +110,7 @@ def	handler_generate_registration_options():
 		"email" : session["email"]
 	}
 	# recieve bloc api response
-	response = requests.get(url="https://bloc-api.bloclabs.repl.co/bloc/users/signup", params=payload).json()
+	response = requests.get(url="https://bloc-api.bloclabs.repl.co/users/signup", params=payload).json()
 	# json response to get registration challenge 
 	response_object = json.loads(response)
 	# set registration challenge
@@ -135,7 +135,7 @@ def	handler_verify_registration_response():
 		"user" : session["email"],
 	}
 	# get response from post request and print it
-	response = requests.post(url="https://bloc-api.bloclabs.repl.co/bloc/users/verify_signup", params= payload).json()
+	response = requests.post(url="https://bloc-api.bloclabs.repl.co/users/verify_signup", params= payload).json()
 	
 	if response["verified"] == True:
 		print(response)
@@ -143,14 +143,10 @@ def	handler_verify_registration_response():
 		db.session.add(new_user)
 		db.session.commit()
 		# Note: you must supply the user_id who performed the event as the first parameter.
-		login_user(new_user,	remember=True)
-		
-		# tell mixpanel user is officially signed up
 		mp.track(new_user.id, 'Signed Up',  {
-		  'Signup Type': 'New User',
-			'Username' : new_user.email
+		  'Signup Type': 'New User'
 		})
-		
+		login_user(new_user,	remember=True)
 		flash('Account created!', category = 'success')
 		return response
 	else:
@@ -192,12 +188,40 @@ def	handler_generate_authentication_options():
 	print("IN	GENERATE	AUTH	OPTIONS")
 	global	current_authentication_challenge
 	
+	
+	# # get user from session email
+	# print("ASSIGNING	USER")
+	
+	# user	=	User.query.filter_by(email=session['email']).first()
+	# # who is user?
+	# print(user.email)
+	# # what is users username?
+	
+	
+	# # get corrent user from session
+	# #user = User.query.filter_by(email=session['email']).first()
+	# # get the users
+	# print(f"USER.CREDENTIALS:	{user.credentials}")
+	# options	=	generate_authentication_options(
+	# 		rp_id=rp_id,
+	# 		# allow_credentials=[{
+	# 		# 		"type":	"public-key",
+	# 		# 		"id":	cred.credential_id,
+	# 		# 		"transports":	cred.credential_transport
+	# 		# }	for	cred	in	user.credentials],
+	# 		user_verification=UserVerificationRequirement.REQUIRED,
+	# )
+	
+	# current_authentication_challenge	=	options.challenge
+	
+	# return	options_to_json(options)
+	# payload
 	payload = {
 		"domain" : rp_id, 
 		"email" : session["email"]
 	}
 	# recieve bloc api response
-	response = requests.get(url="https://bloc-api.bloclabs.repl.co/bloc/users/login", params=payload).json()
+	response = requests.get(url="https://bloc-api.bloclabs.repl.co/users/login", params=payload).json()
 	# json response to get registration challenge 
 	response_object = json.loads(response)
 	# set registration challenge
@@ -226,22 +250,49 @@ def	hander_verify_authentication_response():
 	}
 	print("response")
 	# get response from post request and print it
-	response = requests.post(url="https://bloc-api.bloclabs.repl.co/bloc/users/verify_login", params= payload).json()
+	response = requests.post(url="https://bloc-api.bloclabs.repl.co/users/verify_login", params= payload).json()
 
 	"""If user is verified """
 	if response["verified"] == True:
 		print(response)
 		user = User.query.filter_by(email=session['email']).first()
 		login_user(user,	remember=True)
-		# tell mixpanel user is officially signed up
-		mp.track(user.id, 'Logged in',  {
-		  'Login Type': 'Existing User',
-			'Username' : user.email
-		})
-		flash('Login successful!', category = 'success')
+		flash('Account created!', category = 'success')
 		return response
 	else:
 		return {"verified":False}
+	# try:
+	# 		credential	=	AuthenticationCredential.parse_raw(body)
+
+	# 		#	Find	the	user's	corresponding	public	key
+			
+	# 		user = User.query.filter_by(email=session['email']).first()
+	# 		user_credential	=	None
+	# 		for	cred	in	user.credentials:
+	# 				if	cred.credential_id	==	credential.raw_id:
+	# 						user_credential	=	cred
+
+	# 		if	user_credential	is	None:
+	# 				raise	Exception("Could	not	find	corresponding	public	key	in	DB")
+
+	# 		#	Verify	the	assertion
+	# 		verification	=	verify_authentication_response(
+	# 				credential=credential,
+	# 				expected_challenge=current_authentication_challenge,
+	# 				expected_rp_id=rp_id,
+	# 				expected_origin=origin,
+	# 				credential_public_key=user_credential.credential_public_key,
+	# 				credential_current_sign_count=user_credential.current_sign_count,
+	# 				require_user_verification=True,
+	# 		)
+	# except	Exception	as	err:
+	# 		return	{"verified":	False,	"msg":	str(err),	"status":	400}
+
+	# #	Update	our	credential's	sign	count	to	what	the	authenticator	says	it	is	now
+	# user_credential.current_sign_count = verification.new_sign_count
+	# # log user in
+	# login_user(user, remember=True)
+	# return	{"verified":	True}
 
 
 ################
