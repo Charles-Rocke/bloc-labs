@@ -10,6 +10,7 @@ RUN python -m venv /venv
 ENV PATH="/venv/bin:$PATH"
 
 # install dependencies
+RUN apt-get update && apt-get upgrade -y && apt-get install gcc
 RUN pip install --upgrade pip
 RUN pip install pipenv
 COPY requirements.txt requirements.txt
@@ -18,5 +19,4 @@ COPY ./Pipfile /usr/src/app/Pipfile
 
 # RUN pipenv install -e --skip-lock --system --dev
 # copy project
-RUN apt-get update && apt-get upgrade -y && apt-get install gcc
 CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
