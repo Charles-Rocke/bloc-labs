@@ -1,0 +1,7 @@
+.env
+.venv
+.vscode
+website/db.sqlite3
+.DS_Store
+__pycache__
+*.pyc
