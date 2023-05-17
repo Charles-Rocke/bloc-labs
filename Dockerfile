@@ -1,18 +1,22 @@
-# using a python 3.10 image
-FROM python:3.8-alpine
-# Allow statements and log messages to immediately appear in the Knative logs
-ENV PYTHONUNBUFFERED True
-ENV APP_HOME /app
-WORKDIR $APP_HOME
-# what port being used
-# the working directory
-# copy requirements into current folder
-COPY requirements.txt .
-# what to run at the begining of the image
-# copy contents from current directory
-COPY . .
-RUN pip install --upgrade -r requirements.txt
-# what commands should run when container starts
-# CMD ["/bin/bash", "docker-entrypoint.sh"]
-# configure the container to run in an executed manner
+# pull official base image
+FROM python:3.8.12-alpine As builder
+# set work directory
+WORKDIR /usr/src/app
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+RUN python -m venv /venv
+ENV PATH="/venv/bin:$PATH"
+
+# install dependencies
+RUN pip install --upgrade pip
+RUN pip install pipenv
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+COPY ./Pipfile /usr/src/app/Pipfile
+
+# RUN pipenv install -e --skip-lock --system --dev
+# copy project
+RUN apt-get update && apt-get upgrade -y && apt-get install gcc
 CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
