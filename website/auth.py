@@ -10,20 +10,6 @@ import base64
 import secrets
 # import	uuid
 #################################
-from	webauthn	import	(
-		generate_registration_options,
-		verify_registration_response,
-		generate_authentication_options,
-		verify_authentication_response,
-		options_to_json,
-)
-from	webauthn.helpers.structs	import	(
-		AuthenticatorSelectionCriteria,
-		UserVerificationRequirement,
-		RegistrationCredential,
-		AuthenticationCredential,
-)
-from	webauthn.helpers.cose	import	COSEAlgorithmIdentifier
 
 # mixpanel
 from mixpanel import Mixpanel
