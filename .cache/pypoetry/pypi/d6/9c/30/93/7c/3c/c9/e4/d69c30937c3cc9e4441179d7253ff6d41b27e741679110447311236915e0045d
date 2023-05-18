@@ -1,0 +1,1 @@
+9999999999{"name": "html5lib", "version": "1.0b8", "summary": "HTML parser based on the WHATWG HTML specification", "platform": "UNKNOWN", "requires_dist": ["six"], "requires_python": null, "files": [], "_cache_version": "1.0.0"}

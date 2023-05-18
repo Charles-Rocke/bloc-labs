@@ -1,0 +1,1 @@
+9999999999{"name": "asn1crypto", "version": "1.5.1", "summary": "Fast ASN.1 parser and serializer with definitions for private keys, public keys, certificates, CRL, OCSP, CMS, PKCS#3, PKCS#7, PKCS#8, PKCS#12, PKCS#5, X.509 and TSP", "platform": null, "requires_dist": null, "requires_python": null, "files": [], "_cache_version": "1.0.0"}

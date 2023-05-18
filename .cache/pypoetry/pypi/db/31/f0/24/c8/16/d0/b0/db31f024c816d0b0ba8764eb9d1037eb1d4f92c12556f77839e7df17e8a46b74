@@ -1,0 +1,1 @@
+9999999999{"name": "html5lib-truncation", "version": "0.1.0", "summary": "Truncating HTML with html5lib filter", "platform": "Any", "requires_dist": ["html5lib"], "requires_python": null, "files": [], "_cache_version": "1.0.0"}

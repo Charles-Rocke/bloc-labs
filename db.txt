@@ -1,0 +1,30 @@
+/* 
+After adding flask-migrate to the app:
+
+    In the terminal run flask db init
+        this creates a migrations folder that will hold migrations
+
+    Create the first migration:
+        in the terminal run -> flask db migrate
+
+
+    To apply migrations:
+        in the terminal run -> flask db upgrade
+
+*/
+
+/*
+Changing a sqlalchemy model and generate a migration:
+    in the terminal run -> flask db migrate
+
+    check to make sure migration version file contains correct and current model state
+
+    then in the terminal run -> flask db upgrade or downgrade (depending on the circumstances)
+
+*/
+
+/*
+When making a change to the database with a column that has a default value:
+    check Joses E-book for the SQL code used to make things work
+
+*/

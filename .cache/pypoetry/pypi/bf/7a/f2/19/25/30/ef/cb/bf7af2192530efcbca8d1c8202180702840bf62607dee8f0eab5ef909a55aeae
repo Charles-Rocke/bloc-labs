@@ -1,0 +1,1 @@
+9999999999{"name": "beautifulsoup4", "version": "4.4.1", "summary": "Screen-scraping library", "platform": "UNKNOWN", "requires_dist": ["html5lib; extra == \"html5lib\"", "lxml; extra == \"lxml\""], "requires_python": null, "files": [], "_cache_version": "1.0.0"}
