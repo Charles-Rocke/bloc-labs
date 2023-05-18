@@ -1,1 +1,0 @@
-9999999999{"name": "webauthn", "version": "1.5.2", "summary": "Pythonic WebAuthn", "platform": null, "requires_dist": ["asn1crypto (>=1.4.0)", "cbor2 (>=5.4.2.post1)", "cryptography (>=36.0.1)", "pydantic (>=1.9.0)", "pyOpenSSL (>=22.0.0)"], "requires_python": "", "files": [], "_cache_version": "1.0.0"}

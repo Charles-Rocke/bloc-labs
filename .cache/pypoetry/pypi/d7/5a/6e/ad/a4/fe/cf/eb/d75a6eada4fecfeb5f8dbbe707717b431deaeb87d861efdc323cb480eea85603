@@ -1,1 +1,0 @@
-9999999999{"name": "cbor2", "version": "5.4.3", "summary": "CBOR (de)serializer with extensive tag support", "platform": null, "requires_dist": ["sphinx-rtd-theme ; extra == 'doc'", "sphinx-autodoc-typehints (>=1.2.0) ; extra == 'doc'", "pytest ; extra == 'test'", "pytest-cov ; extra == 'test'"], "requires_python": ">=3.7", "files": [], "_cache_version": "1.0.0"}
