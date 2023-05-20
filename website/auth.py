@@ -29,7 +29,7 @@ auth = Blueprint('auth', __name__)
 ################
 if os.getenv('SERVER_ENV') != 'production':
 	#	customers	domain
-	server_id = "onrender.com"
+	server_id = "bloc-testing.onrender.com"
 	#	customer	origin	site
 	server_origin	=	"https://bloc-testing.onrender.com"
 	#origin	=	"https://bloc.id"
