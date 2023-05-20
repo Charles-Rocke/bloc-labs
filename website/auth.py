@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 from .models import User, WebAuthnCredential, Credential,	UserAccount, _str_uuid
 from . import db
@@ -25,12 +27,13 @@ auth = Blueprint('auth', __name__)
 #	RP	Configuration & Other Settings
 #
 ################
-#	customers	domain
-rp_id	=	"bloclabs.repl.co"
-#	customer	origin	site
-origin	=	"https://bloc.bloclabs.repl.co"
-#origin	=	"https://bloc.id"
-rp_name	=	"Sample	RP"
+if os.getenv('SERVER_ENV') != 'production':
+	#	customers	domain
+	server_id = "onrender.com"
+	#	customer	origin	site
+	server_origin	=	"https://bloc-testing.onrender.com"
+	#origin	=	"https://bloc.id"
+	server_name	=	"Bloc Testing"
 
 #	A	simple	way	to	persist	challenges	until	response	verification
 current_registration_challenge	=	None
@@ -91,8 +94,8 @@ def	handler_generate_registration_options():
 	
 	# payload
 	payload = {
-		"domain" : rp_id, 
-		"domain_name" : rp_name,
+		"domain" : server_id, 
+		"domain_name" : server_name,
 		"email" : session["email"]
 	}
 	# recieve bloc api response
@@ -116,8 +119,8 @@ def	handler_verify_registration_response():
 	print("BODY:	",	type(body))
 	payload = {
 		"request" : body,
-		"domain" : rp_id,
-		"origin" : origin,
+		"domain" : server_id,
+		"server_origin" : server_origin,
 		"user" : session["email"],
 	}
 	# get response from post request and print it
@@ -179,7 +182,7 @@ def	handler_generate_authentication_options():
 	global	current_authentication_challenge
 	
 	payload = {
-		"domain" : rp_id, 
+		"domain" : server_id, 
 		"email" : session["email"]
 	}
 	# recieve bloc api response
@@ -206,8 +209,8 @@ def	hander_verify_authentication_response():
 	
 	payload = {
 		"request" : body,
-		"domain" : rp_id,
-		"origin" : origin,
+		"domain" : server_id,
+		"server_origin" : server_origin,
 		"user" : session["email"],
 	}
 	print("response")
