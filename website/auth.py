@@ -94,8 +94,8 @@ def	handler_generate_registration_options():
 	
 	# payload
 	payload = {
-		"domain" : server_id, 
-		"domain_name" : server_name,
+		"server_id" : server_id, 
+		"server_name" : server_name,
 		"email" : session["email"]
 	}
 	# recieve bloc api response
@@ -119,7 +119,7 @@ def	handler_verify_registration_response():
 	print("BODY:	",	type(body))
 	payload = {
 		"request" : body,
-		"domain" : server_id,
+		"server_id" : server_id,
 		"server_origin" : server_origin,
 		"user" : session["email"],
 	}
@@ -182,7 +182,7 @@ def	handler_generate_authentication_options():
 	global	current_authentication_challenge
 	
 	payload = {
-		"domain" : server_id, 
+		"server_id" : server_id, 
 		"email" : session["email"]
 	}
 	# recieve bloc api response
@@ -209,7 +209,7 @@ def	hander_verify_authentication_response():
 	
 	payload = {
 		"request" : body,
-		"domain" : server_id,
+		"server_id" : server_id,
 		"server_origin" : server_origin,
 		"user" : session["email"],
 	}
