@@ -9,13 +9,18 @@ db = SQLAlchemy()
 DB_NAME = "database.db"
 migrate = Migrate()
 
-def create_app(db_url = None):
+def create_app():
 	app = Flask(__name__)
 	# load in environment variables
 	load_dotenv()
-	app.config['SECRET_KEY'] = 'asdfghjkl' or os.getenv("SECRET_KEY")
-	# connection location string to data base and create a way to switch from devlopment and production
-	app.config["SQLALCHEMY_DATABASE_URI"] = db_url or os.getenv("DATABASE_URL", "sqlite:///data.db")
+	app.config['SECRET_KEY'] = 'devenv' or os.getenv("PROD_SECRET_KEY")
+	# Configure SQLite3 for development
+	app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///development.db'
+
+	# Configure PostgreSQL for production
+	if os.getenv('ENV') == 'production':
+		app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+  
 	db.init_app(app)
 	migrate.init_app(app, db)
 
