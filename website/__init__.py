@@ -15,9 +15,11 @@ def create_app():
 	if os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-test.yaml':
 		load_dotenv('.env.dev')
 		app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+		app.config["SQLALCHEMY_DATABASE_URI"]= os.environ.get("DATABASE_URL")
 	elif os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-prod.yaml':
 		load_dotenv('.env.prod')
 		app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+		app.config["SQLALCHEMY_DATABASE_URI"]= os.environ.get("DATABASE_URL")
 	else:
 		load_dotenv()
 
