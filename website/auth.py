@@ -27,13 +27,12 @@ auth = Blueprint('auth', __name__)
 #	RP	Configuration & Other Settings
 #
 ################
-if os.getenv('SERVER_ENV') != 'production':
-	#	customers	domain
-	server_id = "bloc-testing.onrender.com"
-	#	customer	origin	site
-	server_origin	=	"https://bloc-testing.onrender.com"
-	#origin	=	"https://bloc.id"
-	server_name	=	"Bloc Testing"
+#	customers	domain
+server_id = os.environ.get("SERVER_ID")
+#	customer	origin	site
+server_origin	=	os.environ.get("SERVER_ORIGIN")
+#origin	=	"https://bloc.id"
+server_name	=	os.environ.get("SERVER_NAME")
 
 #	A	simple	way	to	persist	challenges	until	response	verification
 current_registration_challenge	=	None
