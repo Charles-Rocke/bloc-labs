@@ -1,7 +1,41 @@
-.venv
-*.pyc
-__pycache__
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyz
+*.pyzw
+*.pyi
+*.egg-info/
+dist/
+build/
+*.egg
+*.whl
+
+# Virtual environment
+venv/
 .env
-db.sqlite3
-.vscode
-.DS_Store
+.env.prod
+.env.dev
+
+# Docker
+docker-compose-prod.yaml
+docker-compose-test.yaml
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+
+# Miscellaneous
+*.DS_Store
+*.bak
+*.tmp

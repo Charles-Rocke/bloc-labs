@@ -11,39 +11,36 @@ migrate = Migrate()
 
 def create_app():
 	app = Flask(__name__)
-	# load in environment variables
-	load_dotenv()
-	app.config['SECRET_KEY'] = 'devenv' or os.getenv("PROD_SECRET_KEY")
-	# Configure SQLite3 for development
-	app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///development.db'
+	# Load environment variables based on Docker Compose file
+	if os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-test.yaml':
+		load_dotenv('.env.test')
+	elif os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-prod.yaml':
+		load_dotenv('.env.prod')
+	else:
+		load_dotenv()
 
-	# Configure PostgreSQL for production
-	if os.getenv('ENV') == 'production':
-		app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
-  
 	db.init_app(app)
 	migrate.init_app(app, db)
 
-	from.views import views
-	from.auth import auth
-	from.util import util
+	from .views import views
+	from .auth import auth
+	from .util import util
 
-	app.register_blueprint(views,url_prefix='/')
-	app.register_blueprint(auth,url_prefix='/')
-	app.register_blueprint(util,url_prefix='/')
+	app.register_blueprint(views, url_prefix='/')
+	app.register_blueprint(auth, url_prefix='/')
+	app.register_blueprint(util, url_prefix='/')
 
-	from .models import Form, User, Credential,	UserAccount, WebAuthnCredential
+	from .models import Form, User, Credential, UserAccount, WebAuthnCredential
 
-	#create_database(app)
+	# create_database(app)
 
 	login_manager = LoginManager()
 	login_manager.login_view = 'auth.login'
-	#login_manager.login_view = 'views.debugging'
+	# login_manager.login_view = 'views.debugging'
 	login_manager.init_app(app)
 
 	@login_manager.user_loader
 	def load_user(id):
-			return User.query.get(int(id))
-
+		return User.query.get(int(id))
 
 	return app
