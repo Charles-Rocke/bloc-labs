@@ -5,26 +5,8 @@ from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
-from dotenv import dotenv_values
 
 
-# Load environment variables based on Docker Compose file
-# if env is from compose testing
-
-
-if os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose.yaml':
-	load_dotenv('.env.dev')
-	print("loaded test env")
-# if env is from compose production
-elif os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-prod.yaml':
-	load_dotenv('.env.prod')
-	print("loaded prod env")
-else:
-	load_dotenv()
-	print("loaded .env")
-
-	config = dotenv_values(".env")
-	print(config)
 db = SQLAlchemy()
 DB_NAME = "database.db"
 migrate = Migrate()
