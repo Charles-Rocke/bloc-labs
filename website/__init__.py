@@ -22,8 +22,8 @@ else:
 	load_dotenv('.env')
 	print("loaded .env")
 
-config = dotenv_values(".env")
-print(config)
+	config = dotenv_values(".env")
+	print(config)
 db = SQLAlchemy()
 DB_NAME = "database.db"
 migrate = Migrate()
