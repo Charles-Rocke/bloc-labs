@@ -5,28 +5,24 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
 
+# Load environment variables based on Docker Compose file
+# if env is from compose testing
+if os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-test.yaml':
+	load_dotenv('.env.dev')
+# if env is from compose production
+elif os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-prod.yaml':
+	load_dotenv('.env.prod')
+else:
+	load_dotenv()
+ 
 db = SQLAlchemy()
 DB_NAME = "database.db"
 migrate = Migrate()
 
 def create_app():
 	app = Flask(__name__)
-	# Load environment variables based on Docker Compose file
- 	# if env is from compose testing
-	if os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-test.yaml':
-		load_dotenv('.env.dev')
-		app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
-		app.config["SQLALCHEMY_DATABASE_URI"]= os.environ.get("DATABASE_URL")
-	# if env is from compose production
-	elif os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-prod.yaml':
-		load_dotenv('.env.prod')
-		app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
-		app.config["SQLALCHEMY_DATABASE_URI"]= os.environ.get("DATABASE_URL")
-	else:
-		load_dotenv()
-  
-	print(os.getenv('DOCKER_COMPOSE_FILE'))
-	print(app.config["SQLALCHEMY_DATABASE_URI"])
+	app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+	app.config["SQLALCHEMY_DATABASE_URI"]= os.environ.get("DATABASE_URL")
 	db.init_app(app)
 	migrate.init_app(app, db)
 
