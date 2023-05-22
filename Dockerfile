@@ -24,4 +24,4 @@ COPY . .
 EXPOSE 5000
 
 # Set the entrypoint command to run the Gunicorn server
-CMD ["flask", "run", "gunicorn", "--bind", "0.0.0.0:5000", "main:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "main:app"]
