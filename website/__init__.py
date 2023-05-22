@@ -28,10 +28,10 @@ def create_app():
  
 	# Load environment variables based on Docker Compose file
 	# if env is from compose testing
-	if os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-test.yaml':
+	if os.getenv('COMPOSE_FILE') == 'docker-compose-test.yaml':
 		print("loaded test env")
 	# if env is from compose production
-	elif os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-prod.yaml':
+	elif os.getenv('COMPOSE_FILE') == 'docker-compose-prod.yaml':
 		load_dotenv('.env.prod')
 		print("loaded prod env")
 	else:
