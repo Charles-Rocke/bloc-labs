@@ -19,7 +19,7 @@ elif os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-prod.yaml':
 	load_dotenv('.env.prod')
 	print("loaded prod env")
 else:
-	load_dotenv('C:/Users/sp00k/Dev/bloc/.env')
+	load_dotenv('bloc/.env')
 	print("loaded .env")
 
 	config = dotenv_values(".env")
