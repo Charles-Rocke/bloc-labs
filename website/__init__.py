@@ -12,17 +12,21 @@ migrate = Migrate()
 def create_app():
 	app = Flask(__name__)
 	# Load environment variables based on Docker Compose file
+ 	# if env is from compose testing
 	if os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-test.yaml':
 		load_dotenv('.env.dev')
 		app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 		app.config["SQLALCHEMY_DATABASE_URI"]= os.environ.get("DATABASE_URL")
+	# if env is from compose production
 	elif os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-prod.yaml':
 		load_dotenv('.env.prod')
 		app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 		app.config["SQLALCHEMY_DATABASE_URI"]= os.environ.get("DATABASE_URL")
 	else:
 		load_dotenv()
-
+  
+	print(os.getenv('DOCKER_COMPOSE_FILE'))
+	print(app.config["SQLALCHEMY_DATABASE_URI"])
 	db.init_app(app)
 	migrate.init_app(app, db)
 
