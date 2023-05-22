@@ -15,7 +15,7 @@ elif os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-prod.yaml':
 else:
 	load_dotenv('.env')
 
-print(os.getenv('DATABASE_URL'))
+print(os.getenv('DOCKER_COMPOSE_FILE'))
 db = SQLAlchemy()
 DB_NAME = "database.db"
 migrate = Migrate()
