@@ -11,7 +11,7 @@ from dotenv import dotenv_values
 # if env is from compose testing
 
 
-if os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-test.yaml':
+if os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose.yaml':
 	load_dotenv('.env.dev')
 	print("loaded test env")
 # if env is from compose production
