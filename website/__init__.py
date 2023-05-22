@@ -8,7 +8,7 @@ from flask_migrate import Migrate
 # Load environment variables based on Docker Compose file
 # if env is from compose testing
 
-print(os.getenv('DOCKER_COMPOSE_FILE'))
+
 if os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-test.yaml':
 	load_dotenv('.env.dev')
 	print("loaded test env")
@@ -19,7 +19,7 @@ elif os.getenv('DOCKER_COMPOSE_FILE') == 'docker-compose-prod.yaml':
 else:
 	load_dotenv('.env')
 	print("loaded .env")
-
+print(os.environ)
 db = SQLAlchemy()
 DB_NAME = "database.db"
 migrate = Migrate()
