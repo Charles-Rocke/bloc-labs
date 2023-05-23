@@ -1,5 +1,5 @@
 import os
-from render import get_env_variables
+from website.render.helper import get_env_variables
 from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 from .models import User, WebAuthnCredential, Credential,	UserAccount, _str_uuid
 from . import db
