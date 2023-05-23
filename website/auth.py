@@ -1,5 +1,5 @@
 import os
-from dotenv import load_dotenv
+from website import get_env_variables
 from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 from .models import User, WebAuthnCredential, Credential,	UserAccount, _str_uuid
 from . import db
@@ -28,11 +28,12 @@ auth = Blueprint('auth', __name__)
 #
 ################
 #	customers	domain
-server_id = os.environ.get("SERVER_ID")
+env_vars = get_env_variables()
+server_id = env_vars[3]["envVar"]["value"]
 #	customer	origin	site
-server_origin	=	os.environ.get("SERVER_ORIGIN")
+server_origin	=	env_vars[2]["envVar"]["value"]
 #origin	=	"https://bloc.id"
-server_name	=	os.environ.get("SERVER_NAME")
+server_name	=	env_vars[1]["envVar"]["value"]
 
 #	A	simple	way	to	persist	challenges	until	response	verification
 current_registration_challenge	=	None
