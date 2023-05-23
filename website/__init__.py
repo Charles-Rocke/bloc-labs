@@ -7,7 +7,7 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 import requests
 import json
-from render import get_env_variables, update_env_variables
+from .render import get_env_variables, update_env_variables
 
 
 
