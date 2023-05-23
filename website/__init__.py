@@ -11,14 +11,17 @@ import json
 # Helper methods
 # get env variables from render
 def get_env_variables():
-	url = "https://api.render.com/v1/services/srv-chlpgp64dadfmshgctv0/env-vars?limit=20"
+	url = "https://api.render.com/v1/services/srv-chkhdam7avj217eb1k80/env-vars?limit=20"
 
 	headers = {
 		"accept": "application/json",
 		"authorization": "Bearer rnd_h2ezMpqcy92kIx4mNCanLdoCTP1e"
 	}
 
-	response = requests.get(url, headers=headers).json()
+	response = requests.get(url, headers=headers)
+
+	print(response.text)
+
 	return response
 
 
