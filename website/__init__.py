@@ -4,15 +4,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
-
-# Get the absolute path to the parent directory
-parent_directory = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-
-# Add the parent directory to the module search path
-sys.path.append(parent_directory)
-
 from website.render.helper import get_env_variables
-
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
