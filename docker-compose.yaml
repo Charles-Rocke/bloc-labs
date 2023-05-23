@@ -6,14 +6,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
-    environment:
-      - DOCKER_COMPOSE_FILE=docker-compose.yaml
     env_file:
       - .env
     depends_on:
       - db
     volumes:
       - ".:/app"
+    command: gunicorn --bind 0.0.0.0:5000 main:app
   db:
     image: postgres
     environment:

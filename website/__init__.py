@@ -5,6 +5,21 @@ from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
+import requests
+import json
+
+# Helper methods
+# get env variables from render
+def get_env_variables():
+	url = "https://api.render.com/v1/services/srv-chlpgp64dadfmshgctv0/env-vars?limit=20"
+
+	headers = {
+		"accept": "application/json",
+		"authorization": "Bearer rnd_h2ezMpqcy92kIx4mNCanLdoCTP1e"
+	}
+
+	response = requests.get(url, headers=headers).json()
+	return response
 
 
 db = SQLAlchemy()
@@ -13,10 +28,11 @@ migrate = Migrate()
 
 def create_app():
 	app = Flask(__name__)
-
-	app.config.from_pyfile('settings.py')
-	app.config["SECRET_KEY"] = app.config.get("SECRET_KEY")
-	app.config["SQLALCHEMY_DATABASE_URI"] = app.config.get("DATABASE_URL")
+	# get env variables
+	env_vars = get_env_variables()
+	app.config["SECRET_KEY"] = env_vars.SECRET_KEY
+	app.config["SQLALCHEMY_DATABASE_URI"] = env_vars.DATABASE_URL
+	
 	db.init_app(app)
 	migrate.init_app(app, db)
 
