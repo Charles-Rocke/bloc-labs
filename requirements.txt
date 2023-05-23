@@ -22,7 +22,7 @@ debugpy==1.6.3
 dict==2020.12.3
 distlib==0.3.5
 filelock==3.7.1
-flask==2.1.2
+flask==2.2.5
 flask-login==0.6.1
 flask-migrate==4.0.2
 flask-session==0.4.0
