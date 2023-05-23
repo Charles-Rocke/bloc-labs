@@ -32,8 +32,8 @@ def create_app():
 	env_vars = get_env_variables()
 	print(env_vars)
 	print(type(env_vars))
-	app.config["SECRET_KEY"] = env_vars.SECRET_KEY
-	app.config["SQLALCHEMY_DATABASE_URI"] = env_vars.DATABASE_URL
+	app.config["SECRET_KEY"] = env_vars[0]["envVar"]["value"]
+	app.config["SQLALCHEMY_DATABASE_URI"] = env_vars[1]["envVar"]["value"]
 	
 	db.init_app(app)
 	migrate.init_app(app, db)
