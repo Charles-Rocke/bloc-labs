@@ -1,13 +1,8 @@
-import os
-from os import environ
 from flask import Flask
-from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
-import requests
-import json
-from .render.helper import get_env_variables, update_env_variables
+from website.render.helper import get_env_variables
 
 
 
