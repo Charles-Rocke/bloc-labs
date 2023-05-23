@@ -23,3 +23,5 @@ COPY . .
 # Expose the port that the app will listen on
 EXPOSE 5000
 
+# Set the entrypoint command to run the Gunicorn server
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "main:app"]
