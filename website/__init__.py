@@ -30,6 +30,8 @@ def create_app():
 	app = Flask(__name__)
 	# get env variables
 	env_vars = get_env_variables()
+	print(env_vars)
+	print(type(env_vars))
 	app.config["SECRET_KEY"] = env_vars.SECRET_KEY
 	app.config["SQLALCHEMY_DATABASE_URI"] = env_vars.DATABASE_URL
 	
