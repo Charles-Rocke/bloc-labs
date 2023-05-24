@@ -4,11 +4,10 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
-from render.helper import get_env_variables
+from .util import get_env_variables
 
 
 db = SQLAlchemy()
-DB_NAME = "database.db"
 migrate = Migrate()
 
 
@@ -25,13 +24,11 @@ def create_app():
 
     from .views import views
     from .auth import auth
-    from .util import util
 
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
-    app.register_blueprint(util, url_prefix="/")
 
-    from .models import Form, User, Credential, UserAccount, WebAuthnCredential
+    from .models import User
 
     # create_database(app)
 
