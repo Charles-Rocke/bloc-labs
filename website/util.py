@@ -33,14 +33,14 @@ def update_env_variables():
     url = "https://api.render.com/v1/services/srv-chkhdam7avj217eb1k80/env-vars"
 
     payload = [
-        {"key": "SECRET_KEY", "value": "bloc-testing"},
+        {"key": "SECRET_KEY", "value": "3xKZ{:>AEvc0!MvQ/+q}5we98Zx4-I"},
         {
             "key": "DATABASE_URL",
-            "value": "postgresql://blocsquad_test_db:GYQxHXw4110RUu5mWDLbsTHYZwEgCMid@dpg-chl3ug67avj2179cm1fg-a.ohio-postgres.render.com/bloc_test_db",
+            "value": "postgresql://blocsquad_prod:6rgckwPN9z8u746boeiBQhVlHYpOZuCo@dpg-chn4ocm4dad21k4m0n60-a.ohio-postgres.render.com/bloc_prod_db",
         },
-        {"key": "SERVER_NAME", "value": "Testing"},
-        {"key": "SERVER_ORIGIN", "value": "https://bloc-testing.onrender.com"},
-        {"key": "SERVER_ID", "value": "bloc-testing.onrender.com"},
+        {"key": "SERVER_NAME", "value": "bloc"},
+        {"key": "SERVER_ORIGIN", "value": "https://bloc.id"},
+        {"key": "SERVER_ID", "value": "bloc.id"},
     ]
     headers = {
         "accept": "application/json",
