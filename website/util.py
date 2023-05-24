@@ -30,10 +30,10 @@ def get_env_variables():
 
 # update env variables
 def update_env_variables():
-    url = "https://api.render.com/v1/services/srv-chkhdam7avj217eb1k80/env-vars"
+    url = "https://api.render.com/v1/services/srv-chn4p1m7avj3o321d4h0/env-vars"
 
     payload = [
-        {"key": "SECRET_KEY", "value": "3xKZ{:>AEvc0!MvQ/+q}5we98Zx4-I"},
+        {"key": "SECRET_KEY", "value": "RfUjXn2r5u8x/A%D*G-KaPdSgVkYp3s6v9y$B&E(H+MbQeThWmZq4t7w!z%C*F-J@NcRfUjXn2r5u8x/A?D(G+KbPdSgVkYp3s6v9y$B&E)H@McQfThWmZq4t7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3t6v9y$B&E)H@McQfTjWnZr4u7x!z%C*F-JaNdRgUkXp2s5v8y/B?D(G+KbPeShVmYq3t6w9z$C&F)H@McQfTjWnZr4u7x!A%D*G-KaNdRgUkXp2s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F)J@NcRfUjWnZr4u7x!A%D*G-KaPdSgVkYp2s5v8y/B?E(H+MbQeThWmZq4t6w9z$C&F)J@NcRfUjXn2r5u8x!A%D*G-KaPdSgVkYp3s6v9y$B?E(H+MbQeThWmZq4t7w!z%C*F)J@NcRfUjXn2r5u8x/A?D(G+KaPdSgVkYp3s6v9y$B&E)H@McQeThWmZq4t7w!z%C*F-JaN"},
         {
             "key": "DATABASE_URL",
             "value": "postgresql://blocsquad_prod:6rgckwPN9z8u746boeiBQhVlHYpOZuCo@dpg-chn4ocm4dad21k4m0n60-a.ohio-postgres.render.com/bloc_prod_db",
@@ -51,3 +51,4 @@ def update_env_variables():
     response = requests.put(url, json=payload, headers=headers).json
 
     return response
+update_env_variables()
