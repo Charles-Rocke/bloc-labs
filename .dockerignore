@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyz
+*.pyzw
+*.pyi
+*.egg-info/
+dist/
+build/
+*.egg
+*.whl
+
+# Virtual environment
+.venv/
+.env
+.env.prod
+.env.test
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Miscellaneous
+.DS_Store

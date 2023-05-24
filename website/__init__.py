@@ -1,44 +1,44 @@
+import sys
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import path
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from .util import get_env_variables
+
 
 db = SQLAlchemy()
-DB_NAME = "database.db"
 migrate = Migrate()
+
+
 def create_app():
-		app = Flask(__name__)
-		app.config['SECRET_KEY'] = 'asdfghjkl'
-		app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///db.sqlite3'
-		db.init_app(app)
-		migrate.init_app(app, db)
-	
-		from.views import views
-		from.auth import auth
-		from.util import util
+    app = Flask(__name__)
+    # get env variables
 
-		app.register_blueprint(views,url_prefix='/')
-		app.register_blueprint(auth,url_prefix='/')
-		app.register_blueprint(util,url_prefix='/')
+    env_vars = get_env_variables()
+    app.config["SECRET_KEY"] = env_vars["SECRET_KEY"]
+    app.config["SQLALCHEMY_DATABASE_URI"] = env_vars["DATABASE_URL"]
 
-		from .models import Form, User, Credential,	UserAccount, WebAuthnCredential
+    db.init_app(app)
+    migrate.init_app(app, db)
 
-		#create_database(app)
+    from .views import views
+    from .auth import auth
 
-		login_manager = LoginManager()
-		login_manager.login_view = 'auth.login'
-		#login_manager.login_view = 'views.debugging'
-		login_manager.init_app(app)
+    app.register_blueprint(views, url_prefix="/")
+    app.register_blueprint(auth, url_prefix="/")
 
-		@login_manager.user_loader
-		def load_user(id):
-				return User.query.get(int(id))
+    from .models import User
 
+    # create_database(app)
 
-		return app
+    login_manager = LoginManager()
+    login_manager.login_view = "auth.login"
+    # login_manager.login_view = 'views.debugging'
+    login_manager.init_app(app)
 
-# def create_database(app):
-# 		if not path.exists('website/' + DB_NAME):
-# 				db.create_all(app=app)
-# 				print('Created Database')
+    @login_manager.user_loader
+    def load_user(id):
+        return User.query.get(int(id))
+
+    return app
