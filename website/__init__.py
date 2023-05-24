@@ -4,44 +4,44 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
-from website.render import helper
-from website.render.helper import get_env_variables
+from render.helper import get_env_variables
 
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
 migrate = Migrate()
 
+
 def create_app():
-	app = Flask(__name__)
-	# get env variables
+    app = Flask(__name__)
+    # get env variables
 
-	env_vars = get_env_variables()
-	app.config["SECRET_KEY"] = env_vars["SECRET_KEY"]
-	app.config["SQLALCHEMY_DATABASE_URI"] = env_vars["DATABASE_URL"]
-	
-	db.init_app(app)
-	migrate.init_app(app, db)
+    env_vars = get_env_variables()
+    app.config["SECRET_KEY"] = env_vars["SECRET_KEY"]
+    app.config["SQLALCHEMY_DATABASE_URI"] = env_vars["DATABASE_URL"]
 
-	from .views import views
-	from .auth import auth
-	from .util import util
+    db.init_app(app)
+    migrate.init_app(app, db)
 
-	app.register_blueprint(views, url_prefix='/')
-	app.register_blueprint(auth, url_prefix='/')
-	app.register_blueprint(util, url_prefix='/')
+    from .views import views
+    from .auth import auth
+    from .util import util
 
-	from .models import Form, User, Credential, UserAccount, WebAuthnCredential
+    app.register_blueprint(views, url_prefix="/")
+    app.register_blueprint(auth, url_prefix="/")
+    app.register_blueprint(util, url_prefix="/")
 
-	# create_database(app)
+    from .models import Form, User, Credential, UserAccount, WebAuthnCredential
 
-	login_manager = LoginManager()
-	login_manager.login_view = 'auth.login'
-	# login_manager.login_view = 'views.debugging'
-	login_manager.init_app(app)
+    # create_database(app)
 
-	@login_manager.user_loader
-	def load_user(id):
-		return User.query.get(int(id))
+    login_manager = LoginManager()
+    login_manager.login_view = "auth.login"
+    # login_manager.login_view = 'views.debugging'
+    login_manager.init_app(app)
 
-	return app
+    @login_manager.user_loader
+    def load_user(id):
+        return User.query.get(int(id))
+
+    return app
