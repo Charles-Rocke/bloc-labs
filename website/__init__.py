@@ -14,10 +14,12 @@ migrate = Migrate()
 def create_app():
     app = Flask(__name__)
     # get env variables
-
     env_vars = get_testing_env_variables()
-    app.config["SECRET_KEY"] = env_vars["SECRET_KEY"]
-    app.config["SQLALCHEMY_DATABASE_URI"] = env_vars["DATABASE_URL"]
+    if env_vars["SERVER_NAME"] == "testing":
+        app.config["DEBUG"] == True
+    else:
+        app.config["SECRET_KEY"] = env_vars["SECRET_KEY"]
+        app.config["SQLALCHEMY_DATABASE_URI"] = env_vars["DATABASE_URL"]
 
     db.init_app(app)
     migrate.init_app(app, db)
