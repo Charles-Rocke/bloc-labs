@@ -4,7 +4,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
-from .util import get_env_variables
+from .util import get_env_variables, get_testing_env_variables
 
 
 db = SQLAlchemy()
@@ -15,7 +15,7 @@ def create_app():
     app = Flask(__name__)
     # get env variables
 
-    env_vars = get_env_variables()
+    env_vars = get_testing_env_variables()
     app.config["SECRET_KEY"] = env_vars["SECRET_KEY"]
     app.config["SQLALCHEMY_DATABASE_URI"] = env_vars["DATABASE_URL"]
 
