@@ -6,7 +6,7 @@ import requests
 # get env variables
 def get_env_variables():
     url = (
-        "https://api.render.com/v1/services/srv-chkhdam7avj217eb1k80/env-vars?limit=20"
+        "https://api.render.com/v1/services/srv-chn4p1m7avj3o321d4h0/env-vars?limit=20"
     )
 
     headers = {
