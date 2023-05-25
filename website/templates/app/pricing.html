@@ -1,5 +1,10 @@
 {% extends "app/base.html" %} {% block title %}bloc | pricing{% endblock title
 %} {% block content %}
+<!-- mix panel-->
+<script>
+  // Send a default page view event with additional properties
+  mixpanel.track_pageview({ page: "Pricing Page" });
+</script>
 <!-- Mashead header-->
 <header class="masthead">
   <div class="container px-4">
@@ -25,7 +30,55 @@
           </div>
         </div>
         <div class="row justify-content-center">
-          <!-- Single Price Plan Area-->
+          <!-- Starter Price Plan Area-->
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div
+              class="single_price_plan wow fadeInUp"
+              data-wow-delay="0.2s"
+              style="
+                visibility: visible;
+                animation-delay: 0.2s;
+                animation-name: fadeInUp;
+              "
+            >
+              <div class="title">
+                <h3>Starter</h3>
+                <p>for individuals</p>
+                <div class="line"></div>
+              </div>
+              <div class="price">
+                <h4>Free!</h4>
+                <p hidden >per monthly active user</p>
+              </div>
+              <div class="description">
+                <p><i class="lni lni-checkmark-circle"></i>20 Logins per month</p>
+                <p hidden>
+                  <i class="lni lni-checkmark-circle"></i>Premium Customer
+                  Support
+                </p>
+                <p><i class="lni lni-checkmark-circle"></i>Remove Branding</p>
+              </div>
+              <div class="button" id="startup-plan-signup-btn">
+                <a
+                  class="btn startup-price-btn"
+                  href="{{ url_for('auth.signup_email') }}"
+                  >Sign up</a
+                >
+              </div>
+              <!-- mix panel-->
+              <script>
+                // Send a default page view event with additional properties
+                mixpanel.track_links(
+                  "#starter-plan-signup-btn a",
+                  "click nav link",
+                  {
+                    "referrer": document.referrer,
+                  }
+                );
+              </script>
+            </div>
+          </div>
+          <!-- Growth Price Plan Area-->
           <div class="col-12 col-sm-8 col-md-6 col-lg-4">
             <div
               class="single_price_plan wow fadeInUp"
@@ -53,15 +106,27 @@
                 </p>
                 <p><i class="lni lni-checkmark-circle"></i>Remove Branding</p>
               </div>
-              <div class="button">
+              <div class="button" id="startup-plan-signup-btn">
                 <a
                   class="btn startup-price-btn"
                   href="{{ url_for('auth.signup_email') }}"
                   >Sign up</a
                 >
               </div>
+              <!-- mix panel-->
+              <script>
+                // Send a default page view event with additional properties
+                mixpanel.track_links(
+                  "#startup-plan-signup-btn a",
+                  "click nav link",
+                  {
+                    "referrer": document.referrer,
+                  }
+                );
+              </script>
             </div>
           </div>
+          
           <!-- Small Business Price Plan Area--
                   <div class="col-12 col-sm-8 col-md-6 col-lg-4">
                      <div class="single_price_plan active wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
@@ -114,13 +179,24 @@
                   Service
                 </p>
               </div>
-              <div class="button">
+              <div class="button" id="ent-plan-signup-btn">
                 <a
                   class="btn ent-price-btn"
                   href="{{ url_for('auth.signup_email') }}"
                   >Sign up</a
                 >
               </div>
+              <!-- mix panel-->
+              <script>
+                // Send a default page view event with additional properties
+                mixpanel.track_links(
+                  "#ent-plan-signup-btn a",
+                  "click nav link",
+                  {
+                    "referrer": document.referrer,
+                  }
+                );
+              </script>
             </div>
           </div>
         </div>
