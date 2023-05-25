@@ -4,7 +4,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
-from .util import get_env_variables, get_testing_env_variables
+from .util import get_env_variables, get_testing_env_variables, update_testing_env_variables
 
 
 db = SQLAlchemy()
