@@ -160,7 +160,7 @@ a:focus {
 
 a:hover {
   text-decoration: none;
-  color: #05c1ff;
+  color: #05c1ff !important;
   color: -webkit-linear-gradient(left, #05c1ff, #b721ff);
   color: -o-linear-gradient(left, #05c1ff, #b721ff);
   color: -moz-linear-gradient(left, #05c1ff, #b721ff);
