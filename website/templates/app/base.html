@@ -172,83 +172,34 @@
   <!-- Start Body -->
   <body id="page-top">
     <!-- Navigation-->
-    <nav
-      class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm"
-      id="mainNav"
-    >
-      <div class="container px-3">
-        <a class="navbar-brand fw-bold" href="{{ url_for('views.home') }}">
-          <img
-            src="/static/app/images/blocImproved.svg"
-            alt="bloc"
-            width="110"
-            height="99"
-            class="logo d-inline-block align-text-top"
-          />
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
+      <div class="container px-2">
+        <a class="navbar-brand fw-bold" href="/">
+        <img src="/static/app/images/bloc.svg" alt="bloc" width="110" height="99" class="logo d-inline-block align-text-top">
         </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarResponsive"
-          aria-controls="navbarResponsive"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          Menu
-          <i class="bi-list"></i>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="bi-list"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          {% if user.is_authenticated%}
-          <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-            <li class="nav-item">
-              <a class="nav-link me-lg-3" href="#">{{ user.email }}</a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link me-lg-3"
-                href="{{ url_for('views.docs_signup') }}"
-                >docs</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link me-lg-3" href="{{ url_for('auth.logout') }}"
-                >logout</a
-              >
-            </li>
-          </ul>
-
-          {% else %}
-          <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-            <li class="nav-item">
-              <a class="nav-link me-lg-3" href="/#features">features</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link me-lg-3" href="{{ url_for('views.pricing') }}"
-                >pricing</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link me-lg-3"
-                href="{{ url_for('auth.login_email') }}"
-                >login</a
-              >
-            </li>
-          </ul>
-          <form action="{{ url_for('views.pricing') }}">
+          <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0 px-2">
+          <!-- No nav bar links
+            <li class="nav-item"><a class="nav-link me-lg-3" href="/#features">features</a></li>
+            -->
+            <li class="nav-item"><a class="nav-link me-lg-3" href="{{ url_for('views.pricing') }}">pricing</a></li>
+            <br>
+          <form action="signup.html">
             <div class="wrap-login100-form-btn">
-              <div class="login100-form-bgbtn"></div>
-              <button class="login100-form-btn mx-5">
-                <center>
-                  <span class="d-flex align-items-center">
-                    <span>sign up</span>
-                  </span>
-                </center>
-              </button>
+              <center>
+                <div class="login100-form-bgbtn"></div>
+                <button class="login100-form-btn mx-5">
+                <span class="align-items-center">
+                <span>sign up</span>
+                </span>
+                </button>
+              </center>
             </div>
           </form>
-          {% endif %}
         </div>
       </div>
     </nav>
