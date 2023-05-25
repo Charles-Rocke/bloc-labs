@@ -11,27 +11,20 @@ import json
 import requests
 import base64
 import secrets
-
-# import	uuid
-#################################
-
-# mixpanel
-from mixpanel import Mixpanel
-
-mp = Mixpanel("1ba15c80ce8bc4322c3cdbd7815f21e3")
-
-
 #################################
 auth = Blueprint("auth", __name__)
 
 
 ################
 #
-# 	RP	Configuration & Other Settings
+# 	Server	Configuration & Other Settings
 #
 ################
-# 	customers	domain
 env_vars = get_env_variables()
+# mixpanel
+from mixpanel import Mixpanel
+mp = Mixpanel(env_vars["MIXPANEL_PROJECT_ID"])
+# 	customers	domain
 server_id = env_vars["SERVER_ID"]
 # 	customer	origin	site
 server_origin = env_vars["SERVER_ORIGIN"]

@@ -41,6 +41,7 @@ def update_env_variables():
         {"key": "SERVER_NAME", "value": "bloc"},
         {"key": "SERVER_ORIGIN", "value": "https://bloc.id"},
         {"key": "SERVER_ID", "value": "bloc.id"},
+        {"key": "MIXPANEL_PROJECT_ID", "value": "a3296db38d1b8533b188f4281b20fb51"},
     ]
     headers = {
         "accept": "application/json",
