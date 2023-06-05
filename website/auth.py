@@ -48,11 +48,11 @@ def signup_email():
     # check for choice pricing plan
     if request.method == "POST":
         # if growth plan
-        if request.form.get("growth"):
+        if request.form['price-plan-btn'] == "growth":
             pricing_plan = "growth"
             session["pricing_plan"] = pricing_plan
         # if enterprise
-        elif request.form.get("enterprise"):
+        elif request.form['price-plan-btn'] == "enterprise":
             pricing_plan = "enterprise"
             session["pricing_plan"] = pricing_plan
         # else is starter
