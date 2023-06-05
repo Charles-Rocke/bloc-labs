@@ -46,7 +46,7 @@ current_authentication_challenge = None
 def signup_email():
     pricing_plan = ""
     # check for choice pricing plan
-    if request.method("POST"):
+    if request.method == "POST":
         # if growth plan
         if request.form.get("growth"):
             pricing_plan = "growth"
