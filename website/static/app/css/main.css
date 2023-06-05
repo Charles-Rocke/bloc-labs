@@ -539,7 +539,7 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 0 20px;
-  width: 100%;
+  width: 140px;
   height: 50px;
 }
 
@@ -655,6 +655,8 @@ iframe {
 }
 
 /* Pricing Page CSS */
+
+
 .single_price_plan {
   position: relative;
   z-index: 1;
@@ -805,6 +807,10 @@ iframe {
 
 /* Pricing buttons */
 
+.starter-price-btn {
+  color: white !important;
+  background-color: #BCB8B9 !important;
+}
 .startup-price-btn {
   color: white !important;
   background-color: #05c1ff !important;
