@@ -44,6 +44,21 @@ current_authentication_challenge = None
 # email signup
 @auth.route("/signup", methods=["GET", "POST"])
 def signup_email():
+    pricing_plan = ""
+    # check for choice pricing plan
+    if request.method("POST"):
+        # if growth plan
+        if request.form.get("growth"):
+            pricing_plan = "growth"
+            session["pricing_plan"] = pricing_plan
+        # if enterprise
+        elif request.form.get("enterprise"):
+            pricing_plan = "enterprise"
+            session["pricing_plan"] = pricing_plan
+        # else is starter
+        else:
+            pricing_plan = "starter"
+            session["pricing_plan"] = pricing_plan
     return render_template("app/auth/signup_email.html", user=current_user)
 
 
@@ -121,6 +136,7 @@ def handler_verify_registration_response():
         "server_id": server_id,
         "server_origin": server_origin,
         "user": session["email"],
+        "pricing_plan": session["pricing_plan"]
     }
     # get response from post request and print it
     response = requests.post(

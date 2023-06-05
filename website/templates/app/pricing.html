@@ -52,13 +52,12 @@
               </div>
               <div class="description">
                 <p><i class="lni lni-checkmark-circle"></i>20 Logins per month</p>
-                <p hidden>
-                  <i class="lni lni-checkmark-circle"></i>Premium Customer
-                  Support
-                </p>
-                <p hidden><i class="lni lni-checkmark-circle"></i>Remove Branding</p>
               </div>
-              <div class="button" id="startup-plan-signup-btn">
+              <!-- Starter plan form -->
+              <form action="{{ url_for('auth.signup_email') }}" method="POST">
+                <button class="btn starter-price-btn" id="starter-plan-signup-btn" name="starter-plan" type="submit" value="starter">Sign up</button>
+              </form>
+              <div hidden class="button" id="startup-plan-signup-btn">
                 <a
                   class="btn starter-price-btn"
                   href="{{ url_for('auth.signup_email') }}"
@@ -69,8 +68,7 @@
               <script>
                 // Send a default page view event with additional properties
                 mixpanel.track_links(
-                  "#starter-plan-signup-btn a",
-                  "click nav link",
+                  "#starter-plan-signup-btn button",
                   {
                     "referrer": document.referrer,
                   }
@@ -95,7 +93,7 @@
                 <div class="line"></div>
               </div>
               <div class="price">
-                <h4>$0.25</h4>
+                <h4>$0.15</h4>
                 <p>per monthly active user</p>
               </div>
               <div class="description">
@@ -106,7 +104,11 @@
                 </p>
                 <p><i class="lni lni-checkmark-circle"></i>Remove Branding</p>
               </div>
-              <div class="button" id="startup-plan-signup-btn">
+              <!-- Growth plan form -->
+              <form action="{{ url_for('auth.signup_email') }}" method="POST">
+                <button class="btn startup-price-btn" id="growth-plan-signup-btn" name="growth-plan" type="submit" value="growth">Sign up</button>
+              </form>
+              <div hidden class="button" id="startup-plan-signup-btn">
                 <a
                   class="btn startup-price-btn"
                   href="{{ url_for('auth.signup_email') }}"
@@ -117,8 +119,7 @@
               <script>
                 // Send a default page view event with additional properties
                 mixpanel.track_links(
-                  "#startup-plan-signup-btn a",
-                  "click nav link",
+                  "#growth-plan-signup-btn button",
                   {
                     "referrer": document.referrer,
                   }
@@ -179,7 +180,11 @@
                   Service
                 </p>
               </div>
-              <div class="button" id="ent-plan-signup-btn">
+              <!-- Growth plan form -->
+              <form action="{{ url_for('auth.signup_email') }}" method="POST">
+                <button class="btn ent-price-btn" id="ent-plan-signup-btn" name="ent-plan" type="submit" value="enterprise">Sign up</button>
+              </form>
+              <div hidden class="button" id="ent-plan-signup-btn">
                 <a
                   class="btn ent-price-btn"
                   href="{{ url_for('auth.signup_email') }}"
@@ -190,8 +195,7 @@
               <script>
                 // Send a default page view event with additional properties
                 mixpanel.track_links(
-                  "#ent-plan-signup-btn a",
-                  "click nav link",
+                  "#ent-plan-signup-btn button",
                   {
                     "referrer": document.referrer,
                   }
