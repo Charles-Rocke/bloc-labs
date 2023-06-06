@@ -87,7 +87,7 @@ mixpanel.identify(`{{ current_user.email }}`);
 							<ul class="dropdown-menu">
 								<li class="dropdown-item"><a class="nav-link me-lg-3" href="#">{{ user.email }}</a></li>
 								<li class="dropdown-item"><a class="nav-link me-lg-3" href="#">payments</a></li>
-		            <li class="dropdown-item"><a class="nav-link me-lg-3" href="#">settings</a></li>
+		            <li class="dropdown-item"><a class="nav-link me-lg-3" href="{{ url_for('views.settings') }}">settings</a></li>
 		            <li class="dropdown-item"><a class="nav-link me-lg-3" href="#"">support</a></li>
 							</ul>
 						</div>
