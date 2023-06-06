@@ -1,4 +1,4 @@
-{% extends "app/dashboard/base.html" %} {% block title %}docs | login{% endblock title %}
+{% extends "app/dashboard/base.html" %} {% block title %}bloc | Settings{% endblock title %}
 {% block content %}
 <!-- tracking page views -->
 <script>
@@ -9,6 +9,7 @@
     <!-- Start of Settings -->
     <div class="bloc-doc-container p-2 container-fluid">
         <div class="container">
+            <h2 class="mt-2 mb-2">Settings</h2>
             <label for="inputPassword6" class="form-label">Pricing Plan <small><a class="nav-link me-lg-3" href={{ url_for('views.pricing') }}>upgrade?</a></small></label>
             <input class="form-control" type="text" value="{{current_user.pricing_plan}}" aria-label="readonly input example" readonly>
             <br>
