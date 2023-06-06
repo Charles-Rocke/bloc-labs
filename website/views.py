@@ -22,15 +22,15 @@ def	pricing():
 
 ################
 #
-#	Account	Views
+#	Profile	Views
 #
 ################
 #	Setup
-@views.route("/account/setup",	methods=["GET",	"POST"])
+@views.route("/settings",	methods=["GET",	"POST"])
 @login_required
-def	account_setup():
+def	settings():
 	
-	return	render_template("app/account/setup.html", user = current_user)
+	return	render_template("app/dashboard/profile/settings.html", user = current_user)
 
 ################
 #

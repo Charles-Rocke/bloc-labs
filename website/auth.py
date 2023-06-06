@@ -105,8 +105,8 @@ def handler_generate_registration_options():
 
     # payload
     payload = {
-        "server_id": server_id,
-        "server_name": server_name,
+        "domain": server_id,
+        "domain_name": server_name,
         "email": session["email"],
     }
     # recieve bloc api response
@@ -133,10 +133,11 @@ def handler_verify_registration_response():
     print("BODY:	", type(body))
     payload = {
         "request": body,
-        "server_id": server_id,
-        "server_origin": server_origin,
-        "user": session["email"],
-        "pricing_plan": session["pricing_plan"]
+        "domain": server_id,
+        "domain_origin": server_origin,
+        "email": session["email"],
+        "pricing_plan": session["pricing_plan"],
+        "user_api_key": session["user_uid"]
     }
     # get response from post request and print it
     response = requests.post(
@@ -199,7 +200,10 @@ def handler_generate_authentication_options():
     print("IN	GENERATE	AUTH	OPTIONS")
     global current_authentication_challenge
 
-    payload = {"server_id": server_id, "email": session["email"]}
+    payload = {
+        "domain": server_id, 
+        "email": session["email"]
+        }
     # recieve bloc api response
     response = requests.get(
         url="https://bloc-api.bloclabs.repl.co/bloc/users/login", params=payload
@@ -227,9 +231,9 @@ def hander_verify_authentication_response():
 
     payload = {
         "request": body,
-        "server_id": server_id,
-        "server_origin": server_origin,
-        "user": session["email"],
+        "domain": server_id,
+        "domain_origin": server_origin,
+        "email": session["email"],
     }
     print("response")
     # get response from post request and print it
