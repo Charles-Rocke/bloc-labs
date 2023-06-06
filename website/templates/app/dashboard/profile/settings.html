@@ -8,8 +8,12 @@
 <main>
     <!-- Start of Settings -->
     <div class="bloc-doc-container p-2 container-fluid">
-        <label for="inputPassword6" class="form-label">API Key</label>
-        <input class="form-control" type="password" value="{{current_user.api_key}}" aria-label="readonly input example" readonly>
+        <div class="container">
+            <label for="inputPassword6" class="form-label">Pricing Plan <small><a class="nav-link me-lg-3" href={{ url_for('views.pricing') }}>upgrade?</a></small></label>
+            <input class="form-control" type="text" value="{{current_user.pricing_plan}}" aria-label="readonly input example" readonly>
+            <label for="inputPassword6" class="form-label">API Key</label>
+            <input class="form-control" type="text" value="{{current_user.api_key}}" aria-label="readonly input example" readonly>
+        </div>
     </div>
 </main>
 
