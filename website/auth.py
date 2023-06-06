@@ -91,7 +91,8 @@ def signup():
 
         # add email to session
         session["email"] = request.form.get("email")
-
+        # Retrieve the time zone value from the form data
+        session["timezone"] = request.form.get('timezone')
         # 	check if user email already exists
         user = User.query.filter_by(email=session["email"]).first()
         if user:
@@ -143,7 +144,8 @@ def handler_verify_registration_response():
         "domain_origin": server_origin,
         "email": session["email"],
         "pricing_plan": session["pricing_plan"],
-        "user_api_key": session["user_uid"]
+        "user_api_key": session["user_uid"],
+        "user_timezone" : session["timezone"]
     }
     # get response from post request and print it
     response = requests.post(
