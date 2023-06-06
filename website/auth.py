@@ -59,6 +59,7 @@ def signup_email():
         else:
             pricing_plan = "starter"
             session["pricing_plan"] = pricing_plan
+            print(session["pricing_plan"])
     return render_template("app/auth/signup_email.html", user=current_user)
 
 
@@ -146,7 +147,7 @@ def handler_verify_registration_response():
 
     if response["verified"] == True:
         print(response)
-        new_user = User(email=session["email"])
+        new_user = User(email=session["email"], pricing_plan=session_pricing_plan, api_key=session["user_uid"])
         db.session.add(new_user)
         db.session.commit()
         # Note: you must supply the user_id who performed the event as the first parameter.
