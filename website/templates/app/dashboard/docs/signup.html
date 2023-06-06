@@ -213,15 +213,18 @@ import base64</code></pre>
 				<br>
 				<h3>Settings</h3>
 				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
-					First you will need to configure some settings that are crucial to a secure authentication system. The code below demonstrates exactly what you would need in Python.
+					First you will need to configure some settings that are crucial to a secure authentication system. The code below demonstrates exactly what you would need in Python. DO NOT add an ending slash "/" at the end of your domain or domain origin. You will also need your api key which you can get by <a class="nav-link me-lg-3" href={{ url_for('views.settings') }}>clicking here</a> 
         </p>
         <div class="bloc-code-box">
           <pre><code class="language-python" data-prismjs-copy="Copy">#	your	domain
-rp_id	=	"yourdomain.com"
+domain	=	"yourdomain.com"
 #	your origin	site (basically just adding https:// if you don't use a sub-domain)
-origin	=	"https://yourdomain.com"
+domain_origin	=	"https://yourdomain.com"
 # your site name
-rp_name	=	"your domain name"
+domain_name	=	"your sites name"
+# your api key (keep this in your .env secrets by the way, this is only done for tutorial purposes)
+api_key = "your api key"
+
 
 #	A	simple	way	to	persist	challenges	until	response	verification (extra layer of security that is required to use the api)
 current_registration_challenge	=	None
@@ -253,14 +256,16 @@ current_authentication_challenge	=	None</code></pre>
 				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
 					This next part is both of the last parts. First, configure a button to initiate the authentication like the image below (this is 1. EDIT in your auth-script file). This route is sending the data to the api. Then building the next route that will be used to verify the signup (as you can see, security is heavily baked in).
 					After you build this route, go into your 'auth-script' and do "3. EDIT".
+					NOTE: All parameters in the pay load MUST BE in the exact order as the code in the payload.
         </p>
 				<img src="/static/app/images/demo4.jpg" class="img-fluid p-3" alt="Goal">
         <div class="bloc-code-box">
           <pre><code class="language-python" data-prismjs-copy="Copy"># payload
 	payload = {
+		"api_key" : api_key,
 		"domain" : rp_id, 
 		"domain_name" : rp_name,
-		"email" : session["email"]
+		"user_email" : session["email"],
 	}
 	# recieve bloc api response
 	response = requests.get(url="https://bloc-api.bloclabs.repl.co/users/signup", params=payload).json()
@@ -283,10 +288,11 @@ current_authentication_challenge	=	None</code></pre>
 body	=	request.get_data()
 # your payload for the api
 payload = {
+	"api_key" : api_key,
 	"request" : body,
 	"domain" : rp_id,
-	"origin" : origin,
-	"user" : session["email"],
+	"domain_origin" : origin,
+	"user_email" : session["email"],
 }
 # recieve response from post request
 response = requests.post(url="https://bloc-api.bloclabs.repl.co/users/verify_signup", params= payload).json()

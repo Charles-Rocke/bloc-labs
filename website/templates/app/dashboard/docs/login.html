@@ -68,12 +68,14 @@
 				<!-- building login generation -->
 				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
 					These next 2 parts are just like sign up. After you build this route, go into your 'auth-script' and do "6. EDIT".
+					REMEMBER: All parameters must be in the SAME order as the code in the payload.
         </p>
         <div class="bloc-code-box">
           <pre><code class="language-python" data-prismjs-copy="Copy"># payload
 	payload = {
+		"api_key" : api_key,
 		"domain" : rp_id, 
-		"email" : session["email"]
+		"user_email" : session["email"],
 	}
 	# recieve bloc api response
 	response = requests.get(url="https://bloc-api.bloclabs.repl.co/users/login", params=payload).json()
@@ -96,10 +98,11 @@
 body	=	request.get_data()
 # your payload for the api
 payload = {
+	"api_key" : api_key,
 	"request" : body,
 	"domain" : rp_id,
-	"origin" : origin,
-	"user" : session["email"],
+	"domain_origin" : origin,
+	"user_email" : session["email"],
 }
 # recieve response from post request
 response = requests.post(url="https://bloc-api.bloclabs.repl.co/users/verify_login", params= payload).json()
