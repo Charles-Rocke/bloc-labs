@@ -67,11 +67,14 @@
 				<!-- Start enable Send and Recieve webauthn data -->
 				<br>
 				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
-					Next copy the code below to send and recieve data to and from our api. You will need to edit 8 parts, which you can easily find by ctrl + f (windows) or command + f (mac) and enter 'EDIT' to search for all 8. This will be referred to as 'auth-script' throughout the docs. Link this js code at the end of your html right before the closing &lt;/body&gt; tag.
+					The code below is broken into two parts for your convenience. You can can put them into the same file but for ease of use this tutorial will break it into two files.
+					<!-- Next copy the code below to send and recieve data to and from our api. You will need to edit 8 parts, which you can easily find by ctrl + f (windows) or command + f (mac) and enter 'EDIT' to search for all 8. This will be referred to as 'auth-script' throughout the docs. Link this js code at the end of your html right before the closing &lt;/body&gt; tag. -->
+					The first file  you can call signup-auth.js is below. And the next after it you can call login-auth.js.
+
 				</p>
 				<div class="bloc-code-box">
 					<pre><code class="language-javascript">// import blocJS auth methods
-const { startSignup, startLogin } = blocJS;
+const { startSignup } = blocJS;
 /**
  * Signup Button
  */
@@ -123,49 +126,51 @@ document
 			console.log("not authenticated");
     }
 });
+</code></pre>
+			<div class="bloc-code-box">
+				<pre><code class="language-html">/**
+					* Login Button
+					*/
+				   document
+					   // 5. EDIT your Login button html 'id' below
+					 .getElementById("yourLoginBtnIDHere")
+					 .addEventListener("click", async () => {
+					   /* Generate login options for your user */
+						   // 6. EDIT this fetch request your route that will make the api request to our server
+					   const resp = await fetch("/your-login-route-here");
+					   const opts = await resp.json();
+					   // Start bloc Login
+					   let authResp;
+					   try {
+					   authResp = await startLogin(opts);
+					   } catch (err) {
+						 throw new Error(err);
+					   }
+					   /* Send response to server */
+						   // 7. EDIT this fetch request your route that will make the api request to our server
+					   const verificationResp = await fetch(
+						 "/your-verify-login-route-here",
+						 {
+						   method: "POST",
+						   headers: {
+							 "Content-Type": "application/json",
+						   },
+						   body: JSON.stringify(authResp),
+						 }
+					   );
+					   // Report validation response
+					   const verificationRespJSON = await verificationResp.json();
+					   const { verified, msg } = verificationRespJSON;
+						   if (verified) {
+							   /* Redirect to your "login required" page */
+							   // 8. EDIT this location to redirect the user to your login required page
+							   window.location = "/your/redirect/location/here";
+					   } else {
+							   console.log("not authenticated");
+					   }
+				   });</code></pre>
+			</div>
 
-
-/**
- * Login Button
- */
-document
-	// 5. EDIT your Login button html 'id' below
-  .getElementById("yourLoginBtnIDHere")
-  .addEventListener("click", async () => {
-    /* Generate login options for your user */
-		// 6. EDIT this fetch request your route that will make the api request to our server
-    const resp = await fetch("/your-login-route-here");
-    const opts = await resp.json();
-    // Start bloc Login
-    let authResp;
-    try {
-    authResp = await startLogin(opts);
-    } catch (err) {
-      throw new Error(err);
-    }
-    /* Send response to server */
-		// 7. EDIT this fetch request your route that will make the api request to our server
-    const verificationResp = await fetch(
-      "/your-verify-login-route-here",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(authResp),
-      }
-    );
-    // Report validation response
-    const verificationRespJSON = await verificationResp.json();
-    const { verified, msg } = verificationRespJSON;
-		if (verified) {
-			/* Redirect to your "login required" page */
-			// 8. EDIT this location to redirect the user to your login required page
-			window.location = "/your/redirect/location/here";
-    } else {
-			console.log("not authenticated");
-    }
-});</code></pre>
 					<p class="lead fw-normal text-muted mb-5 mb-lg-0">
 					Copy and paste the 2 html buttons into their respective files (a signup.html and login.html for example) and add these 'id' names to 1. EDIT and 5. EDIT in your auth-script js file.
 				</p>
