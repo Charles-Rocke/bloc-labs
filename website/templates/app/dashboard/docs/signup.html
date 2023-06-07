@@ -19,10 +19,14 @@
     <!-- end Docs header -->
     <!--Signup Docs-->
     <div class="container">
+		<div class="alert alert-info" role="alert">
+			<a class="nav-link me-lg-3" href="{{ url_for('views.settings') }}">Copy and paste your API Key to follow the docs by clicking here</a>
+		</div>
 			<div class = "pb-3">
         <h2>Prerequisites:</h2>
 				<ul>
 					<li class=" pt-3 lead fw-normal text-muted mb-5 mb-lg-0">✅ Your application environment will need an HTTPS connection, otherwise the biotmetric/device authentication prompt won't come up on the screen.</li>
+					<!-- <li class=" pt-3 lead fw-normal text-muted mb-5 mb-lg-0">✅ Your API Key which you can get by <a class="nav-link me-lg-3" href="{{ url_for('views.settings') }}">clicking here</a></li> -->
 				</ul>
 				<br>
       </div>
