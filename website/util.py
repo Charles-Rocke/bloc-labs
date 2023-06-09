@@ -109,3 +109,5 @@ def update_testing_env_variables():
     response = requests.put(url, json=payload, headers=headers).json()
 
     return response
+
+update_env_variables()
