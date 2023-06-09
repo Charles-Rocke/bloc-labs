@@ -806,6 +806,10 @@ iframe {
 }
 
 /* Pricing buttons */
+.starter-price-btn {
+  color: white !important;
+  background-color: #BCB8B9 !important;
+}
 
 .starter-price-btn {
   color: white !important;
