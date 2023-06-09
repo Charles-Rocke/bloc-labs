@@ -655,6 +655,8 @@ iframe {
 }
 
 /* Pricing Page CSS */
+
+
 .single_price_plan {
   position: relative;
   z-index: 1;
@@ -809,6 +811,10 @@ iframe {
   background-color: #BCB8B9 !important;
 }
 
+.starter-price-btn {
+  color: white !important;
+  background-color: #BCB8B9 !important;
+}
 .startup-price-btn {
   color: white !important;
   background-color: #05c1ff !important;

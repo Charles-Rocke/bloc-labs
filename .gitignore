@@ -14,6 +14,7 @@ build/
 
 # Virtual environment
 venv/
+.venv
 *.env
 .env.prod
 .env.dev
@@ -42,3 +43,5 @@ logs/
 
 # app
 website/util
+
+deployscript.txt

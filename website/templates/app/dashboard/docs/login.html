@@ -17,7 +17,7 @@
     </center>
 		<br>
     <!-- end Docs header -->
-    <!--Signup Docs-->
+    <!--Login Docs-->
     <div class="container">
       <div>
         <h2>Step 3: Server Login</h2>
@@ -28,7 +28,21 @@
           </p>
         </center>
       </div>
+	  <br>
       <div>
+		<p class="lead fw-normal text-muted mb-5 mb-lg-0">
+			Before login starting Copy the code below and place right before your &lt;/head&gt; on your login page that performs the device based authentication. You can try just inheriting from a template but at your discretion. There are no risks by doing it either way, just that it may not work with templating. That doen't mean it's impossible!
+		</p>
+		<br>
+		<label for="quick-read" class="form-label"><strong>Skim Read:</strong></label>
+		<ul>
+			<li class=" pt-3 lead fw-normal text-muted mb-5 mb-lg-0">Copy and paste into login.html/respective file if your not using templates</li>
+		</ul>
+		<div class="bloc-code-box">
+			<pre><code id="code-copied" class="language-javascript" data-prismjs-copy="Copy">
+				&lt;script src="/your/static/folder/location/bloc.min.js"&gt;&lt;/script&gt;
+			</code></pre>
+        </div>
 				<!-- Start enable Send and Recieve webauthn data -->
 				<br>
 				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
@@ -50,6 +64,11 @@
 				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
 					Now, build the proccesing route like below. This route is processing the email that will be submitted by your user. Make sure to redirect to this current route (this is important)
         </p>
+		<br>
+		<label for="quick-read" class="form-label"><strong>Skim Read:</strong></label>
+		<ul>
+			<li class=" pt-3 lead fw-normal text-muted mb-5 mb-lg-0">Copy and paste into auth.py/respective file</li>
+		</ul>
         <div class="bloc-code-box">
           <pre><code class="language-python" data-prismjs-copy="Copy">if request.method == 'POST':
 		# add email to your session
@@ -60,12 +79,19 @@
 				<!-- building login generation -->
 				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
 					These next 2 parts are just like sign up. After you build this route, go into your 'auth-script' and do "6. EDIT".
+					REMEMBER: All parameters must be in the SAME order as the code in the payload.
         </p>
+		<br>
+		<label for="quick-read" class="form-label"><strong>Skim Read:</strong></label>
+		<ul>
+			<li class=" pt-3 lead fw-normal text-muted mb-5 mb-lg-0">Copy and paste into auth.py/respective file</li>
+		</ul>
         <div class="bloc-code-box">
           <pre><code class="language-python" data-prismjs-copy="Copy"># payload
 	payload = {
+		"api_key" : api_key,
 		"domain" : rp_id, 
-		"email" : session["email"]
+		"user_email" : session["email"],
 	}
 	# recieve bloc api response
 	response = requests.get(url="https://bloc-api.bloclabs.repl.co/users/login", params=payload).json()
@@ -82,16 +108,21 @@
 				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
 					2nd part and lastly, login verification...
 					then do "7. EDIT" and "8. EDIT".
-        </p>
+        </p><br>
+		<label for="quick-read" class="form-label"><strong>Skim Read:</strong></label>
+		<ul>
+			<li class=" pt-3 lead fw-normal text-muted mb-5 mb-lg-0">Copy and paste into auth.py/respective file</li>
+		</ul>
         <div class="bloc-code-box">
           <pre><code class="language-python" data-prismjs-copy="Copy"># data from coming from blocJS, '7. EDIT'
 body	=	request.get_data()
 # your payload for the api
 payload = {
+	"api_key" : api_key,
 	"request" : body,
 	"domain" : rp_id,
-	"origin" : origin,
-	"user" : session["email"],
+	"domain_origin" : origin,
+	"user_email" : session["email"],
 }
 # recieve response from post request
 response = requests.post(url="https://bloc-api.bloclabs.repl.co/users/verify_login", params= payload).json()

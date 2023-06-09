@@ -19,3 +19,7 @@ class User(db.Model, UserMixin):
     uid = db.Column(db.String(40), default=_str_uuid, unique=True)
     # users email
     email = db.Column(db.String(150), unique=True)
+    # users pricing plan
+    pricing_plan = db.Column(db.String(10))
+    # user api key
+    api_key = db.Column(db.String(), unique=True)

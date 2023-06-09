@@ -1,5 +1,5 @@
 import os
-from .util import get_env_variables
+from .util import get_env_variables, get_testing_env_variables
 from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 from .models import User, _str_uuid
 from . import db
@@ -44,6 +44,27 @@ current_authentication_challenge = None
 # email signup
 @auth.route("/signup", methods=["GET", "POST"])
 def signup_email():
+    pricing_plan = ""
+    # check for choice pricing plan
+    if request.method == "POST":
+        # if growth plan
+        if request.form['price-plan-btn'] == "growth":
+            pricing_plan = "growth"
+            session["pricing_plan"] = pricing_plan
+        # if enterprise
+        elif request.form['price-plan-btn'] == "enterprise":
+            pricing_plan = "enterprise"
+            session["pricing_plan"] = pricing_plan
+        # else is starter
+        else:
+            pricing_plan = "starter"
+            session["pricing_plan"] = pricing_plan
+            print(session["pricing_plan"])
+    # else is starter
+    if request.method == "GET":
+        pricing_plan = "starter"
+        session["pricing_plan"] = pricing_plan
+        print(session["pricing_plan"])
     return render_template("app/auth/signup_email.html", user=current_user)
 
 
@@ -70,7 +91,8 @@ def signup():
 
         # add email to session
         session["email"] = request.form.get("email")
-
+        # Retrieve the time zone value from the form data
+        session["timezone"] = request.form.get('timezone')
         # 	check if user email already exists
         user = User.query.filter_by(email=session["email"]).first()
         if user:
@@ -90,8 +112,8 @@ def handler_generate_registration_options():
 
     # payload
     payload = {
-        "server_id": server_id,
-        "server_name": server_name,
+        "domain": server_id,
+        "domain_name": server_name,
         "email": session["email"],
     }
     # recieve bloc api response
@@ -118,9 +140,12 @@ def handler_verify_registration_response():
     print("BODY:	", type(body))
     payload = {
         "request": body,
-        "server_id": server_id,
-        "server_origin": server_origin,
-        "user": session["email"],
+        "domain": server_id,
+        "domain_origin": server_origin,
+        "email": session["email"],
+        "pricing_plan": session["pricing_plan"],
+        "user_api_key": session["user_uid"],
+        "user_timezone" : session["timezone"]
     }
     # get response from post request and print it
     response = requests.post(
@@ -129,7 +154,7 @@ def handler_verify_registration_response():
 
     if response["verified"] == True:
         print(response)
-        new_user = User(email=session["email"])
+        new_user = User(email=session["email"], pricing_plan=session["pricing_plan"], api_key=session["user_uid"])
         db.session.add(new_user)
         db.session.commit()
         # Note: you must supply the user_id who performed the event as the first parameter.
@@ -183,7 +208,10 @@ def handler_generate_authentication_options():
     print("IN	GENERATE	AUTH	OPTIONS")
     global current_authentication_challenge
 
-    payload = {"server_id": server_id, "email": session["email"]}
+    payload = {
+        "domain": server_id, 
+        "email": session["email"]
+        }
     # recieve bloc api response
     response = requests.get(
         url="https://bloc-api.bloclabs.repl.co/bloc/users/login", params=payload
@@ -211,9 +239,9 @@ def hander_verify_authentication_response():
 
     payload = {
         "request": body,
-        "server_id": server_id,
-        "server_origin": server_origin,
-        "user": session["email"],
+        "domain": server_id,
+        "domain_origin": server_origin,
+        "email": session["email"],
     }
     print("response")
     # get response from post request and print it
