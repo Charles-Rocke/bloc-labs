@@ -150,7 +150,7 @@
       class="row gx-5 align-items-center justify-content-center justify-content-lg-between"
     >
       <center>
-        <h2 class="display-4 lh-1 mb-4">how it works</h2>
+        <h2 class="display-4 lh-1 mb-4">How it works</h2>
       </center>
       <!-- start Cards -->
       <div class="card-group">
@@ -194,14 +194,35 @@
           <div class="card-body">
             <h5 class="card-title">Finish</h5>
             <p class="card-text">
-              After building you will now have Passkey authentication enabled.
-              This automatically works with different operating systems such as Windows, iOS, MacOS, Android, etc.
+              After completion, this will automatically work with different operating systems such as Windows, iOS, MacOS, Android, and any other passkey supported os.
             </p>
           </div>
         </div>
       </div>
       <!-- end Cards -->
       <center></center>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="container px-4">
+    <div
+      class="row gx-5 align-items-center justify-content-center justify-content-lg-between"
+    >
+      <center>
+        <p class="display-5 lh-1 mb-4">No credit card required to get started!</p>
+      </center>
+      <center>
+        <div class="align-items-center">
+          <a
+            class="black-btn btn btn-outline-dark py-3 px-4 rounded-pill"
+            href="{{ url_for('auth.signup_email') }}"
+            >get started now!</a
+          >
+        </div>
+      </center>
     </div>
   </div>
 </section>
