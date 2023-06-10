@@ -21,16 +21,17 @@
   font-family: "Exo 2", sans-serif !important;
 }
 .black-btn {
-  color: black;
+  color: #B721FF;
 }
 .btn-outline-dark {
-  color: #000;
-  border-color: #000;
+  color: #f9f9fa;
+  background-color: #B721FF;
+  border-color: #B721FF;
 }
 .btn-outline-dark:hover {
-  color: #f8f9fa;
-  background-color: #000;
-  border-color: #000;
+  color: #000;
+  background-color: #f9f9fa;
+  border-color: #05C1FF;
 }
 /* bloc primary button */
 .bloc-btn {
@@ -3725,13 +3726,14 @@ fieldset:disabled .btn {
 }
 
 .btn-outline-dark {
-  color: #212529;
-  border-color: #212529;
+  color: #f9f9fa;
+  background-color: #B721FF;
+  border-color: #B721FF;
 }
 .btn-outline-dark:hover {
-  color: #fff;
-  background-color: #212529;
-  border-color: #212529;
+  color: #000;
+  background-color: #f9f9fa;
+  border-color: #05C1FF;
 }
 .btn-check:focus + .btn-outline-dark,
 .btn-outline-dark:focus {
@@ -11939,6 +11941,10 @@ footer a:focus {
   text-decoration: underline;
 }
 
+.cta-section {
+  background-color: #f8f9fa;
+  padding-bottom: 5.5rem;
+}
 .masthead {
   background-color: #f8f9fa;
   padding-top: 9.5rem;
