@@ -14,7 +14,7 @@ migrate = Migrate()
 def create_app():
     app = Flask(__name__)
     # get env variables
-    env_vars = get_testing_env_variables()
+    env_vars = get_env_variables()
     if env_vars["SERVER_NAME"] == "testing":
         app.config["DEBUG"] == True
     else:
