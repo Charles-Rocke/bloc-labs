@@ -42,6 +42,7 @@ logs/
 *.tmp
 
 # app
-website/util
+website/util.py
+website/__pycache__/
 
 deployscript.txt
