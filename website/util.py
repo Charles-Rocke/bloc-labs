@@ -110,4 +110,4 @@ def update_testing_env_variables():
 
     return response
 
-update_env_variables()
+update_testing_env_variables()
