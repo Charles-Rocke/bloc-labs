@@ -238,32 +238,49 @@
             <!-- No nav bar links
             <li class="nav-item"><a class="nav-link me-lg-3" href="/#features">features</a></li>
             -->
+            <div class="nav-item dropdown ">
+              <button class="nav-link btn dropdown-toggle me-lg-3" type="button" data-bs-toggle="dropdown">
+                docs
+              </button>
+              <ul class="dropdown-menu">
+                <li class="dropdown-item"><a class="nav-link me-lg-3" href="{{ url_for('views.quick_docs_signup') }}">Sign up</a></li>
+                <li class="dropdown-item"><a class="nav-link me-lg-3" href="{{ url_for('views.quick_docs_login') }}">Login</a></li>
+              </ul>
+            </div>
             <li class="nav-item">
-              <a class="nav-link me-lg-3" href="{{ url_for('views.pricing') }}"
-                >pricing</a
-              >
+              <a class="nav-link btn me-lg-3" style="text-align:left;" href="/">home</a>
             </li>
-            <li class="nav-item">
-              <a
-                class="nav-link me-lg-3"
-                href="{{ url_for('auth.login_email') }}"
-                >login</a
-              >
-            </li>
-            <br />
-            <form action="{{ url_for('auth.signup_email') }}">
-              <div class="wrap-login100-form-btn">
-                <center>
-                  <div class="login100-form-bgbtn"></div>
-                  <button class="login100-form-btn mx-5">
-                    <span class="align-items-center">
-                      <span>get started</span>
-                    </span>
-                  </button>
-                </center>
-              </div>
-            </form>
-          </ul>
+              <!-- <li class="nav-item dropdown-toggle">
+                <a
+                  class="nav-link me-lg-3"
+                  href="{{ url_for('views.quick_docs_signup') }}"
+                  >docs</a
+                >
+              </li> -->
+              <li class="nav-item">
+                <a class="nav-link btn me-lg-3" style="text-align:left;" href="/pricing">pricing</a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link btn me-lg-3" style="text-align:left;"
+                  href="{{ url_for('auth.login_email') }}"
+                  >login</a
+                >
+              </li>
+              <br />
+              <form action="{{ url_for('auth.signup_email') }}">
+                <div class="wrap-login100-form-btn">
+                  <center>
+                    <div class="login100-form-bgbtn"></div>
+                    <button class="login100-form-btn mx-5">
+                      <span class="align-items-center">
+                        <span>get started</span>
+                      </span>
+                    </button>
+                  </center>
+                </div>
+              </form>
+            </ul>
           {% endif %}
         </div>
       </div>

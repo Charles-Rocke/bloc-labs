@@ -20,11 +20,17 @@
             <br />
             Get up and running in minutes and boost user conversion.
           </p>
-          <div class="d-flex flex-column flex-lg-row align-items-center">
+          <div class="d-flex flex-column flex-lg-row align-items-center flex-masthead-cta">
             <a
-              class="black-btn btn btn-outline-dark py-3 px-4 rounded-pill"
+              class="purple-btn btn btn-outline-dark py-3 px-4 rounded-pill"
               href="{{ url_for('auth.signup_email') }}"
               >get started now!</a
+            >
+            <br>
+            <a
+              class="btn btn-outline-black py-3 px-4 rounded-pill"
+              href="{{ url_for('views.quick_docs_signup') }}"
+              >Documentation</a
             >
           </div>
         </div>

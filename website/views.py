@@ -52,6 +52,22 @@ def	docs_login():
 
 ################
 #
+#	App	Docs	Views
+#
+################
+# signup
+@views.route("quickstart/docs/signup")
+def quick_docs_signup():
+    return	render_template("app/docs_signup.html", user = current_user)
+
+
+@views.route("quickstart/docs/login")
+def quick_docs_login():
+    return	render_template("app/docs_login.html", user = current_user)
+
+
+################
+#
 #	Other	Views
 #
 ################

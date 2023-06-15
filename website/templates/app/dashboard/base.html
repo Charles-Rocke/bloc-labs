@@ -25,9 +25,9 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/static/app/css/util.css">
     <link rel="stylesheet" type="text/css" href="/static/app/css/main.css">
-    <link rel="stylesheet" type="text/css" href="/static/app/css/setup.css">
-	<link rel="stylesheet" type="text/css" href="/static/app/css/styles.css">
-	<link rel="stylesheet" type="text/css" href="/static/app/css/prism.css">
+    <!-- <link rel="stylesheet" type="text/css" href="/static/app/css/setup.css"> -->
+	  <link rel="stylesheet" type="text/css" href="/static/app/css/styles.css">
+	  <link rel="stylesheet" type="text/css" href="/static/app/css/prism.css">
     <!--===============================================================================================-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -100,9 +100,53 @@
 			  	<li class="nav-item"><a class="btn" href = "{{ url_for('auth.logout') }}">logout</a></li>
 			</ul>
 			{% else %}
-			<ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-				<li class="nav-item"><a class="nav-link me-lg-3" href = "{{ url_for('auth.logout') }}">johndoe@email.com</a></li>
-			</ul>
+			<ul class="navbar-nav ms-auto me-4 my-3 my-lg-0 px-2">
+        <!-- No nav bar links
+        <li class="nav-item"><a class="nav-link me-lg-3" href="/#features">features</a></li>
+        -->
+        <div class="nav-item dropdown ">
+          <button class="nav-link btn dropdown-toggle me-lg-3" type="button" data-bs-toggle="dropdown">
+            docs
+          </button>
+          <ul class="dropdown-menu">
+            <li class="dropdown-item"><a class="nav-link me-lg-3" href="{{ url_for('views.quick_docs_signup') }}">Sign up</a></li>
+            <li class="dropdown-item"><a class="nav-link me-lg-3" href="{{ url_for('views.quick_docs_login') }}">Login</a></li>
+          </ul>
+        </div>
+        <li class="nav-item">
+          <a class="nav-link btn me-lg-3" style="text-align:left;" href="/">home</a>
+        </li>
+          <!-- <li class="nav-item dropdown-toggle">
+            <a
+              class="nav-link me-lg-3"
+              href="{{ url_for('views.quick_docs_signup') }}"
+              >docs</a
+            >
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link btn me-lg-3" style="text-align:left;" href="/pricing">pricing</a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link btn me-lg-3" style="text-align:left;"
+              href="{{ url_for('auth.login_email') }}"
+              >login</a
+            >
+          </li>
+          <br />
+          <form action="{{ url_for('auth.signup_email') }}">
+            <div class="wrap-login100-form-btn">
+              <center>
+                <div class="login100-form-bgbtn"></div>
+                <button class="login100-form-btn mx-5">
+                  <span class="align-items-center">
+                    <span>get started</span>
+                  </span>
+                </button>
+              </center>
+            </div>
+          </form>
+        </ul>
 			{% endif %}
         </div>
       </div>
@@ -188,9 +232,9 @@
     <!--===============================================================================================-->
     <script src="/static/js/main.js"></script>
     <!-- JS -->
-    <script src="/static/app/js/setup.js"></script>
-	<script src="/static/js/util.js"></script>
-	<script src="/static/app/js/prism.js"></script>
+    <!-- <script src="/static/app/js/setup.js"></script> -->
+    <!-- <script src="/static/js/util.js"></script> -->
+    <script src="/static/app/js/prism.js"></script>
 	<script type="module" src="/static/app/js/mixpanel/mixpanel.js"></script>
 	{% if user.pricing_plan != "starter" %}
 	<!-- Start of HubSpot Chatbot Embed Code -->
