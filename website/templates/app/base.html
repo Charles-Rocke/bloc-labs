@@ -181,7 +181,7 @@
   </head>
   <!-- Start Body -->
   <body id="page-top">
-    <!-- Navigation-->
+    <!-- Navigation Bar -->
     <nav
       class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm"
       id="mainNav"
@@ -196,76 +196,92 @@
             class="logo d-inline-block align-text-top"
           />
         </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarResponsive"
-          aria-controls="navbarResponsive"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          Menu
-          <i class="bi-list"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          {% if user.is_authenticated %}
-          <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-            <li class="nav-item">
-              <a class="nav-link me-lg-3" href="#">{{ user.email }}</a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link me-lg-3"
-                href="{{ url_for('views.docs_signup') }}"
-                >docs</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link me-lg-3" href="{{ url_for('views.pricing') }}"
-                >pricing</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link me-lg-3" href="{{ url_for('auth.logout') }}"
-                >logout</a
-              >
-            </li>
-          </ul>
-
-          {% else %}
-          <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0 px-2">
-            <!-- No nav bar links
-            <li class="nav-item"><a class="nav-link me-lg-3" href="/#features">features</a></li>
-            -->
-            <li class="nav-item">
-              <a class="nav-link me-lg-3" href="{{ url_for('views.pricing') }}"
-                >pricing</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link me-lg-3"
-                href="{{ url_for('auth.login_email') }}"
-                >login</a
-              >
-            </li>
-            <br />
-            <form action="{{ url_for('auth.signup_email') }}">
-              <div class="wrap-login100-form-btn">
-                <center>
-                  <div class="login100-form-bgbtn"></div>
-                  <button class="login100-form-btn mx-5">
-                    <span class="align-items-center">
-                      <span>get started</span>
-                    </span>
-                  </button>
-                </center>
+				<!-- Menu button -->
+				<div class="navbar-menu-nav">
+					<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+	        Menu
+	        	<i class="bi-list"></i>
+	        </button>
+				</div>
+				<!-- start Menu Navigation -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" id="offcanvasRight">
+					<div class="offcanvas-header">
+				    <h5 class="offcanvas-title" id="offcanvasRightLabel">Menu</h5>
+				    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+				  </div>
+					<div class="offcanvas-body">
+	          {% if user.is_authenticated %}
+	          <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+							<!-- Docs navbar dropdown button-->
+							<div class="dropdown ">
+								<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+									docs
+								</button>
+								<ul class="dropdown-menu">
+									<li class="dropdown-item"><a class="nav-link me-lg-3" href="{{ url_for('views.docs_signup') }}">Sign up</a></li>
+									<li class="dropdown-item"><a class="nav-link me-lg-3" href="{{ url_for('views.docs_login') }}">Login</a></li>
+								</ul>
+							</div>
+							<!-- Docs navbar dropdown button-->
+						<div class="dropdown ">
+							<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+								profile
+							</button>
+							<ul class="dropdown-menu">
+								<li class="dropdown-item"><a class="nav-link me-lg-3" href="#">{{ user.email }}</a></li>
+								<li class="dropdown-item"><a class="nav-link me-lg-3" href="#">payments</a></li>
+								<li class="dropdown-item"><a class="nav-link me-lg-3" href="{{ url_for('views.settings') }}">settings</a></li>
+								<li class="dropdown-item"><a class="nav-link me-lg-3" href="#">support</a></li>
+							</ul>
+						</div>
+	            <li class="nav-item"><a class="btn" href = "{{ url_for('auth.logout') }}">logout</a></li>
+	          </ul>
+	          {% else %}
+	          <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0 px-2">
+              <!-- No nav bar links
+              <li class="nav-item"><a class="nav-link me-lg-3" href="/#features">features</a></li>
+              -->
+              <!-- Docs navbar dropdown button-->
+              <div class="nav-item dropdown ">
+                <button class="nav-link btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                  docs
+                </button>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-item"><a class="nav-link me-lg-3" href="{{ url_for('views.quick_docs_signup') }}">Sign up</a></li>
+                  <li class="dropdown-item"><a class="nav-link me-lg-3" href="{{ url_for('views.quick_docs_login') }}">Login</a></li>
+                </ul>
               </div>
-            </form>
-          </ul>
-          {% endif %}
+              <li class="nav-item">
+                <a class="nav-link btn me-lg-3" style="text-align:left;" href="/">home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link btn me-lg-3" style="text-align:left;" href="/pricing">pricing</a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link btn me-lg-3" style="text-align:left;"
+                  href="{{ url_for('auth.login_email') }}"
+                  >login</a
+                >
+              </li>
+              <br />
+              <form action="{{ url_for('auth.signup_email') }}">
+                <div class="wrap-login100-form-btn">
+                  <center>
+                    <div class="login100-form-bgbtn"></div>
+                    <button class="login100-form-btn mx-5">
+                      <span class="align-items-center">
+                        <span>get api key</span>
+                      </span>
+                    </button>
+                  </center>
+                </div>
+              </form>
+            </ul>
+	          {% endif %}
+					</div>
         </div>
+				<!-- end Menu Navigation -->
       </div>
     </nav>
     <!-- flash messages -->
@@ -337,18 +353,14 @@
     <script src="static/app/js/mp4.js"></script>
     <!-- Auth JS -->
     <script src="static/app/js/webauthn/authn.js"></script>
-    {% if user.is_authenticated %}
-      {% if user.pricing_plan != "starter" %}
-      <!-- Start of HubSpot Chatbot Embed Code -->
-      <script
-        type="text/javascript"
-        id="hs-script-loader"
-        async
-        defer
-        src="//js-na1.hs-scripts.com/24065133.js"
-      ></script>
-      <!-- End of HubSpot Chatbot Embed Code -->
-      {% endif %}
-    {% endif %}
+    <!-- Start of HubSpot Chatbot Embed Code -->
+    <script
+      type="text/javascript"
+      id="hs-script-loader"
+      async
+      defer
+      src="//js-na1.hs-scripts.com/24065133.js"
+    ></script>
+    <!-- End of HubSpot Chatbot Embed Code -->
   </body>
 </html>
