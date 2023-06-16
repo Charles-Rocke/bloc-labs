@@ -21,7 +21,7 @@ def create_app():
         app.config["SECRET_KEY"] = env_vars["SECRET_KEY"]
         app.config["SQLALCHEMY_DATABASE_URI"] = env_vars["DATABASE_URL"]
         app.config["DEBUG"] == False
-        app.config["REMEMBER_COOKIE_DURATION"] = timedelta(minutes=1)
+        app.permanent_session_lifetime = timedelta(days=2)
         
 
     db.init_app(app)
