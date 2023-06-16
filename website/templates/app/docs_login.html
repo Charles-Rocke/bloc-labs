@@ -44,10 +44,10 @@
 		</ul>
 		<div class="bloc-code-box">
 			<pre><code id="code-copied" class="language-javascript" data-prismjs-copy="Copy">
-				&lt;script src="/your/static/folder/location/bloc.min.js"&gt;&lt;/script&gt;
+				&lt;script src="/your/static/folder/location/authn.min.js"&gt;&lt;/script&gt;
 			</code></pre>
         </div>
-				<!-- Start enable Send and Recieve webauthn data -->
+				<!-- Start enable Send and Recieve DuoAuthn data -->
 				<br>
 				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
 					At this point you should be at "5. EDIT" out of 8 in your 'send and recieve data' js file. If you aren't go through the edits in the file to adjust to your application and the routes you've just built.
@@ -110,7 +110,7 @@
 	current_authentication_challenge = response_object["challenge"]
 	# decode registration challenge to expected challenge (AGAIN the 3 ='s at the end are EXTREMELY IMPORTANT and NEED TO BE ADDED IN)
 	current_authentication_challenge = base64.urlsafe_b64decode(f"{current_authentication_challenge}===")
-	# return response to bloc js package, this is returning to '6. EDIT' if you cntl + f or command + f
+	# return response to DuoAuthn js package, this is returning to '6. EDIT' if you cntl + f or command + f
 	return response</code></pre>
 				</div>
 				<!-- building signup generation -->
@@ -131,7 +131,7 @@
 			<li class=" pt-3 lead fw-normal text-muted mb-5 mb-lg-0">Copy and paste into auth.py/respective file</li>
 		</ul>
         <div class="bloc-code-box">
-          <pre><code class="language-python" data-prismjs-copy="Copy"># data from coming from blocJS, '7. EDIT'
+          <pre><code class="language-python" data-prismjs-copy="Copy"># data from coming from DuoAuthn, '7. EDIT'
 body	=	request.get_data()
 # your payload for the api
 payload = {

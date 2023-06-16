@@ -114,7 +114,7 @@ document
 		// 2. EDIT this fetch request your route that will make the api request to our server
     const resp = await fetch("/your-signup-route-here");
     const opts = await resp.json();
-    // Start WebAuthn Registration
+    // Start DuoAuthn Registration
     let regResp;
     try {
       regResp = await startSignup(opts);
