@@ -20,7 +20,7 @@ auth = Blueprint("auth", __name__)
 # 	Server	Configuration & Other Settings
 #
 ################
-env_vars = get_env_variables()
+env_vars = get_testing_env_variables()
 # mixpanel
 from mixpanel import Mixpanel
 mp = Mixpanel(env_vars["MIXPANEL_PROJECT_ID"])
