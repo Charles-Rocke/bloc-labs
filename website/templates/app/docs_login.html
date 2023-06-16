@@ -12,17 +12,21 @@
     <center>
       <div class ="container pt-5">
         <h1> Login</h1>
-        <p class="lead fw-normal text-muted mb-5 mb-lg-0">Login is much simpler since the bulk of the work is out of the way from sign up</p>
+        <p class="lead fw-normal text-muted mb-5 mb-lg-0">These docs made in a start to finish fashion to ensure success. It starts with <a class="lead fw-normal text-muted mb-5 mb-lg-0" href="/quickstart/docs/signup">Signup</a> then moves here to Login.</p>
+		<p class="lead fw-normal text-muted mb-5 mb-lg-0">At any point that you need help, send a message in the chatbox, I'm happy to help!</p>
       </div>
     </center>
 		<br>
     <!-- end Docs header -->
     <!--Login Docs-->
     <div class="container">
+		<div class="alert alert-info" role="alert">
+			<a class="nav-link me-lg-3" href="{{ url_for('auth.signup_email') }}">You can build without signing up, but api keys will be required to make requests. Click here to get an api key.</a>
+		</div>
       <div>
+		<center>
         <h2>Step 3: Server Login</h2>
         <img src="/static/app/images/finished-image.png" class="doc-img img-fluid p-3" alt="Goal">
-        <center>
           <p class="lead fw-normal text-muted mb-5 mb-lg-0">
             Step 3 completes the entire authentication process between device and your application
           </p>
@@ -59,7 +63,12 @@
 				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
 					The first route, recieving, is simply displaying a page with an input field like below.
         </p>
+		<center>
 				<img src="/static/app/images/login_email.jpg" class="doc-email-img img-fluid p-3" alt="Goal">
+				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
+					This views server code is below
+				</p>
+			</center>
 				<!-- building server email processing -->
 				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
 					Now, build the proccesing route like below. This route is processing the email that will be submitted by your user. Make sure to redirect to this current route (this is important)
@@ -108,7 +117,15 @@
 				<p class="lead fw-normal text-muted mb-5 mb-lg-0">
 					2nd part and lastly, login verification...
 					then do "7. EDIT" and "8. EDIT".
-        </p><br>
+        </p>
+		<br>
+		<center>
+			<img src="/static/app/images/demo4.jpg" class="doc-email-img img-fluid p-3" alt="Goal">
+			<p class="lead fw-normal text-muted mb-5 mb-lg-0">
+				This views server code is below
+			</p>
+				</center>
+		<br>
 		<label for="quick-read" class="form-label"><strong>Skim Read:</strong></label>
 		<ul>
 			<li class=" pt-3 lead fw-normal text-muted mb-5 mb-lg-0">Copy and paste into auth.py/respective file</li>
@@ -145,7 +162,11 @@ else:
 				<center>
 		      <div class ="container">
 		        <h1> Congratulations yet again!!</h1>
-		        <p class="lead fw-normal text-muted mb-lg-0">Your login is done, now go ahead and try out your new authentication system!</p>
+				<center>
+					<img src="/static/app/images/finished-image.png" class="doc-img img-fluid p-3" alt="Goal">
+				</center>
+		        <p class="lead fw-normal text-muted mb-lg-0">Your login is done, now go ahead and try out your new authentication system! It should call the device authentication like the image on the left above. Make sure you've signed up for an api key. That way when you click through, the device authenticator is called (TouchID/FaceID/Windows Hello prompt).</p>
+				<p class="lead fw-normal text-muted mb-5 mb-lg-0">Something not working? Send a message in the chatbox, I'm happy to help!</p>
 						<br>
 		      </div>
 		    </center>
