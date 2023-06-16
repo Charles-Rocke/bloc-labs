@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from .util import get_env_variables, get_testing_env_variables, update_testing_env_variables
-
+from datetime import timedelta
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -21,6 +21,8 @@ def create_app():
         app.config["SECRET_KEY"] = env_vars["SECRET_KEY"]
         app.config["SQLALCHEMY_DATABASE_URI"] = env_vars["DATABASE_URL"]
         app.config["DEBUG"] == False
+        app.permanent_session_lifetime = timedelta(days=2)
+        
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -37,6 +39,7 @@ def create_app():
 
     login_manager = LoginManager()
     login_manager.login_view = "auth.login"
+    login_manager.session_protection = "strong"
     # login_manager.login_view = 'views.debugging'
     login_manager.init_app(app)
 
